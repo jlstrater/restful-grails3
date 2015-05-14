@@ -1,0 +1,18 @@
+{
+  "name": "reveal-template",
+  "version": "0.0.3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal.js": "~2.4.0",
+    "jquery.classList": "*",
+    "headjs": "b8189f180c340fa34a8e197d11bed47b7f03e78d",
+    "lesshat": "~1.1.2",
+    "font-awesome": "~4.3.0"
+  }
+}

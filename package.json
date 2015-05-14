@@ -1,0 +1,35 @@
+{
+  "name": "reveal-template",
+  "version": "0.0.3",
+  "description": "OPI template for reveal.js",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/objectpartners/opi-reveal-template.git"
+  },
+  "keywords": [
+    "reveal",
+    "template",
+    "js",
+    "presentation"
+  ],
+  "author": "Michael Kelly",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/objectpartners/opi-reveal-template/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "jade": "~0.34.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-less": "~0.7.0",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-jade": "~0.8.0",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-shell": "~0.3.1"
+  }
+}
