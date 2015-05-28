@@ -22,8 +22,8 @@ html(class="no-js", ng-app="main")
       .opi-logo
       .slides
         section(data-state="index-slide")
-          h1 Restful Web Services in Grails 3
-          small by Jenn Strater <a href="http://twitter.com/jennstrater" target="_blank"><img style="border:none;margin-top:0px;box-shadow:none;" src="./assets/img/CompanyAndProductLogos/twitter.png"/>@jennstrater</a>
+          h2(style="color:white; margin-top:42%") Restful Web Services in Grails 3
+          small(style="color:white;") by Jenn Strater <a href="http://twitter.com/jennstrater" target="_blank"><img style="border:none;margin-top:0px;box-shadow:none;" src="./assets/img/CompanyAndProductLogos/twitter.png"/>@jennstrater</a>
         section(data-state="github-slide", class="github-section")
           h1 <i class="fa fa-icon fa-github"></i>
           p
@@ -40,19 +40,122 @@ html(class="no-js", ng-app="main")
         section
           h2 About Me
           p Minneapolis, MN
-          p **ADD MORE HERE -- I'm interesting I promise**
+          p <img style="border:none;margin-top:-25px;" src="./assets/img/minnesota.png"/>
+          ul.ul-no-style Connect on Social Media
+            li <a href="https://twitter.com/jennstrater" target="_blank">Twitter</a> @jennstrater
+            li <a href="https://linkedin.com/in/jennstrater" target="_blank">LinkedIn</a> https://linkedin.com/in/jennstrater
+            li <a href="https://github.com/jlstrater" target="_blank">Github</a> https://github.com/jlstrater
 
         section
           h2 Agenda
           ul
             li Remedial REST
-            li 7 Ways you can make your APIs more RESTful
+            li Ways to make your APIs more RESTful
             li Example in Grails 3
 
         section
+          h2 Disclaimer
+          p Not all of these suggestions are right for every situation.
+          aside.notes.
+            You may not agree with everything I am going to suggest.  Frankly, I don't even implement all of these(i.e. Hyperlinks)
+
+        section
           h2 Remedial REST
-          p Definition
-          blockquote 
+        section
+          h2 Definition
+          blockquote.
+            <b>RE</b>presentational <b>S</b>tate <b>T</b>ransfer (REST) is an architectural style that
+            describes how distributed data objects, or resources, can be defined and addressed, stressing the easy exchange
+            of information and scalability.<ital>(Fischer 2013.)</ital>
+          aside.notes
+            NOT a standard or specification
+        section
+          h2 Goals
+          ul
+            li To create a uniform interface between components
+            li Decouple implementations from the underlying services
+
+        section
+          h2 Resources
+          ul
+            li document
+            li image
+            li objects
+
+        section
+          h2 Stateless
+          ul Each request is self-contained and independent of previous calls
+            li Improves scalability
+            li Allows for parallel processing of requests
+            li Lets Resources be viewed in isolation
+
+        section
+          h2 Characteristics
+          ul URLs identify a resource
+            li <code> http://example.com/resource</code>
+            ul
+              li / for list
+              li /{id} for show
+        section
+          h2 Characteristics
+          ul HTTP verbs
+            li GET to retrieve a resource
+            li POST to create a new resource
+            li PUT to update an existing resource
+            li DELETE to remove an existing resource
+        section
+          h2 Characteristics
+
+        section
+          h2 Ways To Improve A RESTful API
+        section
+          h2 HTTP Status Codes
+          ul
+            li 200 is ok ... but not for everything
+        section
+          h2 HTTP Status Codes
+          p Learn the correct status codes for different errors
+          img(src='./assets/img/HTTPStatusCodesTable.png')
+        section
+          h2 URLs
+          ul
+            li <code>http://example.com/resource/{id}</code>
+            li.fragment NOT <code>http://example.com/resource?id=abc123</code>
+            li.fragment NOT <code>http://example.com/resource/{id}/?action=delete</code>
+            li.fragment NOT <code>http://example.com/resource/add</code>
+            li.fragment NOT ...
+        section
+          h2 Versioning
+          ul
+            li
+              <code>http://example.com/v1/resource/id</code>
+            li
+              <code>http://example.com/resource/id?version=1</code>
+        section
+          h2 Consistent Styling
+          ul
+            li casing
+            li resource naming (singular vs plural)
+        section
+          h2 Pagination
+        section
+          h2 Marshalled responses
+        section
+          h2 Multiple Media Types (JSON, XML, etc)
+
+        section
+          h3 Questions?
+          <img src='./assets/img/halofunnyface.jpg' style="border:none;margin:0px;">
+          <img src='./assets/img/pumpkinloaf.jpg' style="border:none;">
+          <img src='./assets/img/upsidedownpumpkin.jpg' style="border:none;">
+          <img src='./assets/img/halopanic.jpg' style="border:none;margin:0px;">
+
+        section
+          h2 References
+          ul.ul-no-style
+            li Kay, Russell. <a href="http://www.computerworld.com/article/2552929/networking/representational-state-transfer--rest-.html">"Representational State Transfer (REST)"</a>. <ital>Computerworld</ital>. 6 Aug 2007. Web
+            li Fischer, Ludovico. <a href="http://code.tutsplus.com/tutorials/a-beginners-guide-to-http-and-rest--net-16340">"A Beginner’s Guide to HTTP and REST"</a>. <ital>Tuts+</ital>. 9 Jan 2013. Web
+            li Fielding, Roy. <ital><a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">Architectural Styles and the Design of Network-based Software Architectures<ital></a>. 2000.
 
     script(src="./assets/js/app.js")
 
