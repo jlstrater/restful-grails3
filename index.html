@@ -25,7 +25,7 @@
       <div class="opi-logo"></div>
       <div class="slides">
         <section data-state="index-slide">
-          <h1>Restful Web Services in Grails 3</h1><small>by Jenn Strater <a href="http://twitter.com/jennstrater" target="_blank"><img style="border:none;margin-top:0px;box-shadow:none;" src="./assets/img/CompanyAndProductLogos/twitter.png"/>@jennstrater</a></small>
+          <h2 style="color:white; margin-top:42%">Restful Web Services in Grails 3</h2><small style="color:white;">by Jenn Strater <a href="http://twitter.com/jennstrater" target="_blank"><img style="border:none;margin-top:0px;box-shadow:none;" src="./assets/img/CompanyAndProductLogos/twitter.png"/>@jennstrater</a></small>
         </section>
         <section data-state="github-slide" class="github-section">
           <h1><i class="fa fa-icon fa-github"></i></h1>
@@ -44,20 +44,127 @@
         <section>
           <h2>About Me</h2>
           <p>Minneapolis, MN</p>
-          <p>**ADD MORE HERE -- I'm interesting I promise**</p>
+          <p><img style="border:none;margin-top:-25px;" src="./assets/img/minnesota.png"/></p>
+          <ul class="ul-no-style">Connect on Social Media
+            <li><a href="https://twitter.com/jennstrater" target="_blank">Twitter</a> @jennstrater</li>
+            <li><a href="https://linkedin.com/in/jennstrater" target="_blank">LinkedIn</a> https://linkedin.com/in/jennstrater</li>
+            <li><a href="https://github.com/jlstrater" target="_blank">Github</a> https://github.com/jlstrater</li>
+          </ul>
         </section>
         <section>
           <h2>Agenda</h2>
           <ul>
             <li>Remedial REST</li>
-            <li>7 Ways you can make your APIs more RESTful</li>
+            <li>Ways to make your APIs more RESTful</li>
             <li>Example in Grails 3</li>
           </ul>
         </section>
         <section>
+          <h2>Disclaimer</h2>
+          <p>Not all of these suggestions are right for every situation.</p>
+          <aside class="notes">
+            You may not agree with everything I am going to suggest.  Frankly, I don't even implement all of these(i.e. Hyperlinks)
+            
+          </aside>
+        </section>
+        <section>
           <h2>Remedial REST</h2>
-          <p>Definition</p>
-          <blockquote> </blockquote>
+        </section>
+        <section>
+          <h2>Definition</h2>
+          <blockquote>
+            <b>RE</b>presentational <b>S</b>tate <b>T</b>ransfer (REST) is an architectural style that
+            describes how distributed data objects, or resources, can be defined and addressed, stressing the easy exchange
+            of information and scalability.<sup>*</sup>
+          </blockquote>
+          <aside class="notes">
+            <NOT>a standard or specification</NOT>
+          </aside>
+        </section>
+        <section>
+          <h2>Goals</h2>
+          <ul>
+            <li>To create a uniform interface between components</li>
+            <li>Decouple implementations from the underlying services</li>
+          </ul><small>Fielding, Roy. <ital>Architectural Styles and the Design of Network-based Software Architectures<ital>. 2000.</small>
+        </section>
+        <section>
+          <h2>Characteristics</h2>
+          <ul>URLs identify a resource
+            <li><code> http://example.com/resource</code></li>
+            <ul>
+              <li>/ for list</li>
+              <li>/{id} for show</li>
+            </ul>
+          </ul>
+        </section>
+        <section>
+          <h2>Characteristics</h2>
+          <ul>HTTP verbs
+            <li>GET to retrieve a resource</li>
+            <li>POST to create a new resource</li>
+            <li>PUT to update an existing resource</li>
+            <li>DELETE to remove an existing resource</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Characteristics</h2>
+        </section>
+        <section>
+          <h2>Ways To Improve A RESTful API</h2>
+        </section>
+        <section>
+          <h2>HTTP Status Codes</h2>
+          <ul>
+            <li>200 is ok ... but not for everything</li>
+          </ul>
+        </section>
+        <section>
+          <h2>HTTP Status Codes</h2>
+          <p>Learn the correct status codes for different errors</p><img src="./assets/img/HTTPStatusCodesTable.png">
+        </section>
+        <section>
+          <h2>URLs</h2>
+          <ul>
+            <li><code>http://example.com/resource/{id}</code></li>
+            <li class="fragment">NOT <code>http://example.com/resource?id=abc123</code></li>
+            <li class="fragment">NOT <code>http://example.com/resource/{id}/?action=delete</code></li>
+            <li class="fragment">NOT <code>http://example.com/resource/add</code></li>
+            <li class="fragment">NOT ...</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Versioning</h2>
+          <ul>
+            <li><code>http://example.com/v1/resource/id</code></li>
+            <li><code>http://example.com/resource/id?version=1</code></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Consistent Casing</h2>
+        </section>
+        <section>
+          <h2>Pagination</h2>
+        </section>
+        <section>
+          <h2>Marshalled responses</h2>
+        </section>
+        <section>
+          <h2>Multiple Return Formats (JSON, XML, etc)</h2>
+        </section>
+        <section>
+          <h3>Questions?</h3><img src='./assets/img/halofunnyface.jpg' style="border:none;margin:0px;">
+          <img src='./assets/img/pumpkinloaf.jpg' style="border:none;">
+          <img src='./assets/img/upsidedownpumpkin.jpg' style="border:none;">
+          <img src='./assets/img/halopanic.jpg' style="border:none;margin:0px;">
+        </section>
+        <section>
+          <h2>References</h2>
+          <ul class="ul-no-style">
+            <li>Kay, Russell. <a href="http://www.computerworld.com/article/2552929/networking/representational-state-transfer--rest-.html">"Representational State Transfer (REST)"</a>. <ital>Computerworld</ital>. 6 Aug 2007. Web</li>
+            <li>Fischer, Ludovico. <a href="http://code.tutsplus.com/tutorials/a-beginners-guide-to-http-and-rest--net-16340">"A Beginner’s Guide to HTTP and REST"</a>. <ital>Tuts+</ital>. 9 Jan 2013. Web</li>
+            <li>Fielding, Roy. <ital><a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">Architectural Styles and the Design of Network-based Software Architectures<ital></a>. 2000.</li>
+          </ul>
         </section>
       </div>
     </div>
