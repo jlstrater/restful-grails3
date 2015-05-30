@@ -51,13 +51,15 @@ html(class="no-js", ng-app="main")
           ul
             li Remedial REST
             li Ways to make your APIs more RESTful
-            li Example in Grails 3
+            ul
+              li with Grails 3 Examples
 
         section
-          h2 Disclaimer
-          p Not all of these suggestions are right for every situation.
-          aside.notes.
-            You may not agree with everything I am going to suggest.  Frankly, I don't even implement all of these(i.e. Hyperlinks)
+          h2 What this talk will NOT cover
+          ul
+            li Scalability of Grails APIs
+            li Security
+            li Ingesting RESTful APIs
 
         section
           h2 Remedial REST
@@ -76,38 +78,50 @@ html(class="no-js", ng-app="main")
             li Decouple implementations from the underlying services
 
         section
-          h2 Resources
+          h1 Characteristics
+        section
+          h2 Uniform Interface
           ul
-            li document
-            li image
-            li objects
+            li Individual Resources are identified using URIs
+            li Resources are abstracted from the data source and can be manipulated before being sent to a client
+            li Hypermedia is the engine for state transfer
 
         section
           h2 Stateless
-          ul Each request is self-contained and independent of previous calls
+          ul Self-contained and independent requests
             li Improves scalability
             li Allows for parallel processing of requests
-            li Lets Resources be viewed in isolation
+            li Lets resources be viewed in isolation
 
         section
-          h2 Characteristics
-          ul URLs identify a resource
-            li <code> http://example.com/resource</code>
-            ul
-              li / for list
-              li /{id} for show
+          h2 Client-Server
+          ul Decoupled clients and servers
+            li Increases portability
+            li Easier to scale
+
         section
-          h2 Characteristics
-          ul HTTP verbs
-            li GET to retrieve a resource
-            li POST to create a new resource
-            li PUT to update an existing resource
-            li DELETE to remove an existing resource
+          h2 Layered System
+          ul Terminus or an Intermediary endpoints
+            li Allows for load balancing and intermediate security enforcers
+
         section
-          h2 Characteristics
+          h2 Hypermedia As The Engine Of Application State (HATEOAS)<sup>*</sup>
+          p link to the resource and navigation
+          pre.
+            <code>{
+              "_links": {
+                "self": { "href": "/members" },
+                "next": [
+                  { "href": "/members?page=2" }
+                ]
+              }
+            }</code>
+        section
+          h2 Questions about REST?
 
         section
           h2 Ways To Improve A RESTful API
+          h3 (with Grails)
         section
           h2 HTTP Status Codes
           ul
@@ -115,33 +129,112 @@ html(class="no-js", ng-app="main")
         section
           h2 HTTP Status Codes
           p Learn the correct status codes for different errors
-          img(src='./assets/img/HTTPStatusCodesTable.png')
+          table(align="center")
+            tr
+              th Code
+              th Description
+            tr
+              th 2XX
+              th Successful
+            tr
+              td 200
+              td OK
+            tr
+              th 4XX
+              th Client Error
+            tr
+              td 400
+              td Bad Request
+            tr
+              td 403
+              td Forbidden
+            tr
+              td 404
+              td Not Found
+            tr
+              th 5XX
+              th Server Errors
+            tr
+              td 500
+              td Internal Server Error
+            tr
+              td 502
+              td Bad Gateway
+
+          small
+            span an exerpt from
+            a(href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html", target="_blank") http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
         section
-          h2 URLs
+          h2 HTTP Status Codes in Grails
+          p Many of the cases are handled by Grails or the server(i.e. 5XXs)
+          pre.
+            <code>if(someCondition) {
+              render status: 4XX
+            }</code>
+        section
+          h2 HTTP verbs
+          ul
+            li GET to retrieve a resource
+            li POST to create a new resource
+            li PUT to update an existing resource
+            li DELETE to remove an existing resource
+        section
+          h2 Endpoints
+          h3 List
+          p <code>http://example.com/resource</code>
+          h3 Show
+          p <code>http://example.com/resource/{id}</code>
+        section
+          h2 Endpoints
           ul
             li <code>http://example.com/resource/{id}</code>
             li.fragment NOT <code>http://example.com/resource?id=abc123</code>
             li.fragment NOT <code>http://example.com/resource/{id}/?action=delete</code>
             li.fragment NOT <code>http://example.com/resource/add</code>
-            li.fragment NOT ...
         section
-          h2 Versioning
-          ul
-            li
-              <code>http://example.com/v1/resource/id</code>
-            li
-              <code>http://example.com/resource/id?version=1</code>
+          h2 Multiple Media Types (JSON, XML, etc)
         section
           h2 Consistent Styling
           ul
             li casing
-            li resource naming (singular vs plural)
+            ul
+              li
+                pre <code>http://example.com/resource</code>
+              li
+                pre NOT <code>http://example.com/ReSoUrCe</code>
+              li Either:
+                pre <code>http://example.com/twoWordResource</code>
+              li Or:
+                pre <code>http://example.com/two-word-resource</code>
+              li Don't Mix and Match
+            li resource names (plural preferred)
         section
           h2 Pagination
+          pre.
+            <code>http://example.com/resource?offset=0&limit=10</code>
         section
           h2 Marshalled responses
         section
-          h2 Multiple Media Types (JSON, XML, etc)
+          h2 HATEOAS
+        section
+          h2 Versioning<sup>*</sup>
+          ul
+            li <b>URI</b> <code>http://example.com/v1/resource/id</code>
+            li <b>Custom Header</b>
+            pre. <code class="text">HTTP GET&#58;
+                https&#58;&#47;&#47;example.com/resource
+                version&#58; 2.0</code>
+            li <b>Content-type</b>
+            pre. <code class="http"><span class="hljs-request">GET</span><span class="hljs-string">https&#58;&#47;&#47;example.com/resource</span>
+                Accept&#58; application/vnd.example.v2+json</code>
+          aside.notes.
+            If you really can't use hypermedia, please at least version your API. There are several ways to do this, each
+            with their own pros and cons.  The easiest to implement is to add /v1/ to the URI.  However, this breaks theory
+            since the URI is no longer just about the resource data.  Be careful if you choose this route as it can cause
+            confusion when some resources are at various version numbers (ie http://example.com/v2/parentResource/v1/childResource).
+            Another option is to add the version number to the headers. This maintains the purity of the URI, but makes it
+            harder for consumers of the API. You can't just have a one button/link for the GET request.  The last option
+            is to specify the version number in the accept header.
 
         section
           h3 Questions?

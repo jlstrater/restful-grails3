@@ -56,16 +56,18 @@
           <ul>
             <li>Remedial REST</li>
             <li>Ways to make your APIs more RESTful</li>
-            <li>Example in Grails 3</li>
+            <ul>
+              <li>with Grails 3 Examples</li>
+            </ul>
           </ul>
         </section>
         <section>
-          <h2>Disclaimer</h2>
-          <p>Not all of these suggestions are right for every situation.</p>
-          <aside class="notes">
-            You may not agree with everything I am going to suggest.  Frankly, I don't even implement all of these(i.e. Hyperlinks)
-            
-          </aside>
+          <h2>What this talk will NOT cover</h2>
+          <ul>
+            <li>Scalability of Grails APIs</li>
+            <li>Security</li>
+            <li>Ingesting RESTful APIs</li>
+          </ul>
         </section>
         <section>
           <h2>Remedial REST</h2>
@@ -75,7 +77,7 @@
           <blockquote>
             <b>RE</b>presentational <b>S</b>tate <b>T</b>ransfer (REST) is an architectural style that
             describes how distributed data objects, or resources, can be defined and addressed, stressing the easy exchange
-            of information and scalability.<sup>*</sup>
+            of information and scalability.<ital>(Fischer 2013.)</ital>
           </blockquote>
           <aside class="notes">
             <NOT>a standard or specification</NOT>
@@ -86,32 +88,58 @@
           <ul>
             <li>To create a uniform interface between components</li>
             <li>Decouple implementations from the underlying services</li>
-          </ul><small>Fielding, Roy. <ital>Architectural Styles and the Design of Network-based Software Architectures<ital>. 2000.</small>
-        </section>
-        <section>
-          <h2>Characteristics</h2>
-          <ul>URLs identify a resource
-            <li><code> http://example.com/resource</code></li>
-            <ul>
-              <li>/ for list</li>
-              <li>/{id} for show</li>
-            </ul>
           </ul>
         </section>
         <section>
-          <h2>Characteristics</h2>
-          <ul>HTTP verbs
-            <li>GET to retrieve a resource</li>
-            <li>POST to create a new resource</li>
-            <li>PUT to update an existing resource</li>
-            <li>DELETE to remove an existing resource</li>
+          <h1>Characteristics</h1>
+        </section>
+        <section>
+          <h2>Uniform Interface</h2>
+          <ul>
+            <li>Individual Resources are identified using URIs</li>
+            <li>Resources are abstracted from the data source and can be manipulated before being sent to a client</li>
+            <li>Hypermedia is the engine for state transfer</li>
           </ul>
         </section>
         <section>
-          <h2>Characteristics</h2>
+          <h2>Stateless</h2>
+          <ul>Self-contained and independent requests
+            <li>Improves scalability</li>
+            <li>Allows for parallel processing of requests</li>
+            <li>Lets resources be viewed in isolation</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Client-Server</h2>
+          <ul>Decoupled clients and servers
+            <li>Increases portability</li>
+            <li>Easier to scale</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Layered System</h2>
+          <ul>Terminus or an Intermediary endpoints
+            <li>Allows for load balancing and intermediate security enforcers</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Hypermedia As The Engine Of Application State (HATEOAS)<sup>*</sup></h2>
+          <p>link to the resource and navigation</p>
+          <pre><code>{
+  "_links": {
+    "self": { "href": "/members" },
+    "next": [
+      { "href": "/members?page=2" }
+    ]
+  }
+}</code></pre>
+        </section>
+        <section>
+          <h2>Questions about REST?</h2>
         </section>
         <section>
           <h2>Ways To Improve A RESTful API</h2>
+          <h3>(with Grails)</h3>
         </section>
         <section>
           <h2>HTTP Status Codes</h2>
@@ -121,36 +149,139 @@
         </section>
         <section>
           <h2>HTTP Status Codes</h2>
-          <p>Learn the correct status codes for different errors</p><img src="./assets/img/HTTPStatusCodesTable.png">
+          <p>Learn the correct status codes for different errors</p>
+          <table align="center">
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <th>2XX</th>
+              <th>Successful</th>
+            </tr>
+            <tr>
+              <td>200</td>
+              <td>OK</td>
+            </tr>
+            <tr>
+              <th>4XX</th>
+              <th>Client Error</th>
+            </tr>
+            <tr>
+              <td>400</td>
+              <td>Bad Request</td>
+            </tr>
+            <tr>
+              <td>403</td>
+              <td>Forbidden</td>
+            </tr>
+            <tr>
+              <td>404</td>
+              <td>Not Found</td>
+            </tr>
+            <tr>
+              <th>5XX</th>
+              <th>Server Errors</th>
+            </tr>
+            <tr>
+              <td>500</td>
+              <td>Internal Server Error</td>
+            </tr>
+            <tr>
+              <td>502</td>
+              <td>Bad Gateway</td>
+            </tr>
+          </table><small><span>an exerpt from</span><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html" target="_blank">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</a></small>
         </section>
         <section>
-          <h2>URLs</h2>
+          <h2>HTTP Status Codes in Grails</h2>
+          <p>Many of the cases are handled by Grails or the server(i.e. 5XXs)</p>
+          <pre><code>if(someCondition) {
+  render status: 4XX
+}</code></pre>
+        </section>
+        <section>
+          <h2>HTTP verbs</h2>
+          <ul>
+            <li>GET to retrieve a resource</li>
+            <li>POST to create a new resource</li>
+            <li>PUT to update an existing resource</li>
+            <li>DELETE to remove an existing resource</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Endpoints</h2>
+          <h3>List</h3>
+          <p><code>http://example.com/resource</code></p>
+          <h3>Show</h3>
+          <p><code>http://example.com/resource/{id}</code></p>
+        </section>
+        <section>
+          <h2>Endpoints</h2>
           <ul>
             <li><code>http://example.com/resource/{id}</code></li>
             <li class="fragment">NOT <code>http://example.com/resource?id=abc123</code></li>
             <li class="fragment">NOT <code>http://example.com/resource/{id}/?action=delete</code></li>
             <li class="fragment">NOT <code>http://example.com/resource/add</code></li>
-            <li class="fragment">NOT ...</li>
           </ul>
         </section>
         <section>
-          <h2>Versioning</h2>
+          <h2>Multiple Media Types (JSON, XML, etc)</h2>
+        </section>
+        <section>
+          <h2>Consistent Styling</h2>
           <ul>
-            <li><code>http://example.com/v1/resource/id</code></li>
-            <li><code>http://example.com/resource/id?version=1</code></li>
+            <li>casing</li>
+            <ul>
+              <li>
+                <pre><code>http://example.com/resource</code></pre>
+              </li>
+              <li>
+                <pre>NOT <code>http://example.com/ReSoUrCe</code></pre>
+              </li>
+              <li>Either:
+                <pre><code>http://example.com/twoWordResource</code></pre>
+              </li>
+              <li>Or:
+                <pre><code>http://example.com/two-word-resource</code></pre>
+              </li>
+              <li>Don't Mix and Match</li>
+            </ul>
+            <li>resource names (plural preferred)</li>
           </ul>
-        </section>
-        <section>
-          <h2>Consistent Casing</h2>
         </section>
         <section>
           <h2>Pagination</h2>
+          <pre><code>http://example.com/resource?offset=0&limit=10</code></pre>
         </section>
         <section>
           <h2>Marshalled responses</h2>
         </section>
         <section>
-          <h2>Multiple Return Formats (JSON, XML, etc)</h2>
+          <h2>HATEOAS</h2>
+        </section>
+        <section>
+          <h2>Versioning<sup>*</sup></h2>
+          <ul>
+            <li><b>URI</b> <code>http://example.com/v1/resource/id</code></li>
+            <li><b>Custom Header</b></li>
+            <pre>. <code class="text">HTTP GET&#58;
+              <https>&#58;&#47;&#47;example.com/resource</https>
+              <version>&#58; 2.0</code></version></pre>
+            <li><b>Content-type</b></li>
+            <pre>. <code class="http"><span class="hljs-request">GET</span><span class="hljs-string">https&#58;&#47;&#47;example.com/resource</span>
+              <Accept>&#58; application/vnd.example.v2+json</code></Accept></pre>
+          </ul>
+          <aside class="notes">
+            If you really can't use hypermedia, please at least version your API. There are several ways to do this, each
+            with their own pros and cons.  The easiest to implement is to add /v1/ to the URI.  However, this breaks theory
+            since the URI is no longer just about the resource data.  Be careful if you choose this route as it can cause
+            confusion when some resources are at various version numbers (ie http://example.com/v2/parentResource/v1/childResource).
+            Another option is to add the version number to the headers. This maintains the purity of the URI, but makes it
+            harder for consumers of the API. You can't just have a one button/link for the GET request.  The last option
+            is to specify the version number in the accept header.
+            
+          </aside>
         </section>
         <section>
           <h3>Questions?</h3><img src='./assets/img/halofunnyface.jpg' style="border:none;margin:0px;">
