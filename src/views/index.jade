@@ -122,6 +122,31 @@ html(class="no-js", ng-app="main")
         section
           h2 Ways To Improve A RESTful API
           h3 (with Grails)
+
+        section
+          h2 Getting Started
+          p Resource Transformation
+          pre.
+            <code>import grails.rest.Resource
+
+            @Resource(uri='gr8ladies')
+            class Gr8Lady {
+              String first
+              String last
+            }</code>
+        section
+          h2 Getting Started
+          p URL mappings
+          pre.
+            <code>URLmappings.groovy
+
+            "/gr8ladies"(resources:"gr8lady")</code>
+          p Or
+          pre.
+            <code>"/gr8ladies"(resources:"gr8lady") {
+              "/chapter"(controller:"chapter", method:"GET")
+            }</code>
+          small --> /gr8ladies/{id}/chapter
         section
           h2 HTTP Status Codes
           ul
@@ -171,6 +196,9 @@ html(class="no-js", ng-app="main")
             <code>if(someCondition) {
               render status: 4XX
             }</code>
+          p or
+          pre.
+            <code>render status: NOT_FOUND</code>
         section
           h2 HTTP verbs
           ul
@@ -178,6 +206,22 @@ html(class="no-js", ng-app="main")
             li POST to create a new resource
             li PUT to update an existing resource
             li DELETE to remove an existing resource
+        section
+          h2 HTTP verbs in Grails
+          h3 Resource Annotation
+          p.fragment Handled by Default! :)
+        section
+          h2 HTTP verbs in Grails
+          p On each Controller
+          pre.
+            <code>class Gr8LadyController {
+              static allowedMethods = [list: "GET", save: "POST", update: "PUT"]
+            }</code>
+        section
+          h2 HTTP verbs in Grails
+          p URL Mappings
+          pre.
+            <code>"/gr8ladies"(resource: "gr8lady", method: "GET")</code>
         section
           h2 Endpoints
           h3 List
@@ -193,19 +237,20 @@ html(class="no-js", ng-app="main")
             li.fragment NOT <code>http://example.com/resource/add</code>
         section
           h2 Multiple Media Types (JSON, XML, etc)
+
         section
           h2 Consistent Styling
           ul
             li casing
             ul
               li
-                pre <code>http://example.com/resource</code>
-              li
-                pre NOT <code>http://example.com/ReSoUrCe</code>
+                pre <code>http://example.com/resources</code>
+              li NOT
+                pre <code>http://example.com/ReSoUrCeS</code>
               li Either:
-                pre <code>http://example.com/twoWordResource</code>
+                pre <code>http://example.com/multiWordResources</code>
               li Or:
-                pre <code>http://example.com/two-word-resource</code>
+                pre <code>http://example.com/multi-word-resources</code>
               li Don't Mix and Match
             li resource names (plural preferred)
         section
@@ -221,11 +266,14 @@ html(class="no-js", ng-app="main")
           ul
             li <b>URI</b> <code>http://example.com/v1/resource/id</code>
             li <b>Custom Header</b>
-            pre. <code class="text">HTTP GET&#58;
-                https&#58;&#47;&#47;example.com/resource
+            li
+              pre.
+                <code class="http">GET https&#58;&#47;&#47;example.com/resource
                 version&#58; 2.0</code>
-            li <b>Content-type</b>
-            pre. <code class="http"><span class="hljs-request">GET</span><span class="hljs-string">https&#58;&#47;&#47;example.com/resource</span>
+            li <b>Content Type</b>
+            li
+              pre.
+                <code class="http">GET https&#58;&#47;&#47;example.com/resource
                 Accept&#58; application/vnd.example.v2+json</code>
           aside.notes.
             If you really can't use hypermedia, please at least version your API. There are several ways to do this, each
@@ -235,6 +283,23 @@ html(class="no-js", ng-app="main")
             Another option is to add the version number to the headers. This maintains the purity of the URI, but makes it
             harder for consumers of the API. You can't just have a one button/link for the GET request.  The last option
             is to specify the version number in the accept header.
+
+        section
+          h2 Versioning in Grails
+          ul
+            ul URI
+              li <code>"/gr8ladies/v1"</code>
+              li <code>"/gr8ladies/v2"</code>
+            ul Accept Header
+              li <code>"/gr8ladies(version:'1.0', resources:"gr8lady", namespace: 'v1')</code>
+              li <code>"/gr8ladies(version:'2.0', resources:"gr8lady", namespace: 'v2')</code>
+
+        section
+          h2 Conclusions
+          ul
+            li REST is an architecture style, not a standard
+            li There are many ways to implement REST
+            li Grails makes REST easy with <code>@Resource</code> and more!
 
         section
           h3 Questions?
