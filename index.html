@@ -142,6 +142,28 @@
           <h3>(with Grails)</h3>
         </section>
         <section>
+          <h2>Getting Started</h2>
+          <p>Resource Transformation</p>
+          <pre><code>import grails.rest.Resource
+
+@Resource(uri='gr8ladies')
+class Gr8Lady {
+  String first
+  String last
+}</code></pre>
+        </section>
+        <section>
+          <h2>Getting Started</h2>
+          <p>URL mappings</p>
+          <pre><code>URLmappings.groovy
+
+"/gr8ladies"(resources:"gr8lady")</code></pre>
+          <p>Or</p>
+          <pre><code>"/gr8ladies"(resources:"gr8lady") {
+  "/chapter"(controller:"chapter", method:"GET")
+}</code></pre><small>--> /gr8ladies/{id}/chapter</small>
+        </section>
+        <section>
           <h2>HTTP Status Codes</h2>
           <ul>
             <li>200 is ok ... but not for everything</li>
@@ -199,6 +221,8 @@
           <pre><code>if(someCondition) {
   render status: 4XX
 }</code></pre>
+          <p>or</p>
+          <pre><code>render status: NOT_FOUND</code></pre>
         </section>
         <section>
           <h2>HTTP verbs</h2>
@@ -208,6 +232,23 @@
             <li>PUT to update an existing resource</li>
             <li>DELETE to remove an existing resource</li>
           </ul>
+        </section>
+        <section>
+          <h2>HTTP verbs in Grails</h2>
+          <h3>Resource Annotation</h3>
+          <p class="fragment">Handled by Default! :)</p>
+        </section>
+        <section>
+          <h2>HTTP verbs in Grails</h2>
+          <p>On each Controller</p>
+          <pre><code>class Gr8LadyController {
+  static allowedMethods = [list: "GET", save: "POST", update: "PUT"]
+}</code></pre>
+        </section>
+        <section>
+          <h2>HTTP verbs in Grails</h2>
+          <p>URL Mappings</p>
+          <pre><code>"/gr8ladies"(resource: "gr8lady", method: "GET")</code></pre>
         </section>
         <section>
           <h2>Endpoints</h2>
@@ -234,16 +275,16 @@
             <li>casing</li>
             <ul>
               <li>
-                <pre><code>http://example.com/resource</code></pre>
+                <pre><code>http://example.com/resources</code></pre>
               </li>
-              <li>
-                <pre>NOT <code>http://example.com/ReSoUrCe</code></pre>
+              <li>NOT
+                <pre><code>http://example.com/ReSoUrCeS</code></pre>
               </li>
               <li>Either:
-                <pre><code>http://example.com/twoWordResource</code></pre>
+                <pre><code>http://example.com/multiWordResources</code></pre>
               </li>
               <li>Or:
-                <pre><code>http://example.com/two-word-resource</code></pre>
+                <pre><code>http://example.com/multi-word-resources</code></pre>
               </li>
               <li>Don't Mix and Match</li>
             </ul>
@@ -265,12 +306,15 @@
           <ul>
             <li><b>URI</b> <code>http://example.com/v1/resource/id</code></li>
             <li><b>Custom Header</b></li>
-            <pre>. <code class="text">HTTP GET&#58;
-              <https>&#58;&#47;&#47;example.com/resource</https>
-              <version>&#58; 2.0</code></version></pre>
-            <li><b>Content-type</b></li>
-            <pre>. <code class="http"><span class="hljs-request">GET</span><span class="hljs-string">https&#58;&#47;&#47;example.com/resource</span>
-              <Accept>&#58; application/vnd.example.v2+json</code></Accept></pre>
+            <li>
+              <pre><code class="http">GET https&#58;&#47;&#47;example.com/resource
+version&#58; 2.0</code></pre>
+            </li>
+            <li><b>Content Type</b></li>
+            <li>
+              <pre><code class="http">GET https&#58;&#47;&#47;example.com/resource
+Accept&#58; application/vnd.example.v2+json</code></pre>
+            </li>
           </ul>
           <aside class="notes">
             If you really can't use hypermedia, please at least version your API. There are several ways to do this, each
@@ -282,6 +326,27 @@
             is to specify the version number in the accept header.
             
           </aside>
+        </section>
+        <section>
+          <h2>Versioning in Grails</h2>
+          <ul>
+            <ul>URI
+              <li><code>"/gr8ladies/v1"</code></li>
+              <li><code>"/gr8ladies/v2"</code></li>
+            </ul>
+            <ul>Accept Header
+              <li><code>"/gr8ladies(version:'1.0', resources:"gr8lady", namespace: 'v1')</code></li>
+              <li><code>"/gr8ladies(version:'2.0', resources:"gr8lady", namespace: 'v2')</code></li>
+            </ul>
+          </ul>
+        </section>
+        <section>
+          <h2>Conclusions</h2>
+          <ul>
+            <li>REST is an architecture style, not a standard</li>
+            <li>There are many ways to implement REST</li>
+            <li>Grails makes REST easy with <code>@Resource</code> and more!</li>
+          </ul>
         </section>
         <section>
           <h3>Questions?</h3><img src='./assets/img/halofunnyface.jpg' style="border:none;margin:0px;">
