@@ -24,7 +24,7 @@ module.exports = function (grunt) {
       combine: {
         files: {
           'dist/assets/css/style.css': [
-            'src/assets/js/components/reveal.js/lib/css/zenburn.css',
+            'src/assets/js/components/reveal.js/lib/css/idea.css',
             'dist/temp/style.css'
           ]
         }

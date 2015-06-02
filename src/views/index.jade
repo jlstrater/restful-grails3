@@ -50,7 +50,7 @@ html(class="no-js", ng-app="main")
           h2 Agenda
           ul
             li Remedial REST
-            li Ways to make your APIs more RESTful
+            li  Ways To Improve A RESTful API
             ul
               li with Grails 3 Examples
 
@@ -101,21 +101,9 @@ html(class="no-js", ng-app="main")
 
         section
           h2 Layered System
-          ul Terminus or an Intermediary endpoints
+          ul Endpoints can be the terminus or an intermediary service
             li Allows for load balancing and intermediate security enforcers
 
-        section
-          h2 Hypermedia As The Engine Of Application State (HATEOAS)<sup>*</sup>
-          p link to the resource and navigation
-          pre.
-            <code>{
-              "_links": {
-                "self": { "href": "/members" },
-                "next": [
-                  { "href": "/members?page=2" }
-                ]
-              }
-            }</code>
         section
           h2 Questions about REST?
 
@@ -124,12 +112,17 @@ html(class="no-js", ng-app="main")
           h3 (with Grails)
 
         section
+          h2 Scope
+          p De-coupled server and client
+          p NO GSPs!
+
+        section
           h2 Getting Started
           p Resource Transformation
           pre.
-            <code>import grails.rest.Resource
+            <code class="java">import grails.rest.Resource
 
-            @Resource(uri='gr8ladies')
+            @Resource(uri='/gr8ladies')
             class Gr8Lady {
               String first
               String last
@@ -138,15 +131,15 @@ html(class="no-js", ng-app="main")
           h2 Getting Started
           p URL mappings
           pre.
-            <code>URLmappings.groovy
+            <code class="java">URLmappings.groovy
 
             "/gr8ladies"(resources:"gr8lady")</code>
           p Or
           pre.
-            <code>"/gr8ladies"(resources:"gr8lady") {
-              "/chapter"(controller:"chapter", method:"GET")
+            <code class="java">"/gr8ladies"(resources:"gr8lady") {
+              "/contribution"(controller:"contribution", method:"GET")
             }</code>
-          small --> /gr8ladies/{id}/chapter
+          small --> /gr8ladies/{id}/contribution
         section
           h2 HTTP Status Codes
           ul
@@ -193,12 +186,9 @@ html(class="no-js", ng-app="main")
           h2 HTTP Status Codes in Grails
           p Many of the cases are handled by Grails or the server(i.e. 5XXs)
           pre.
-            <code>if(someCondition) {
+            <code class="java">if(someCondition) {
               render status: 4XX
             }</code>
-          p or
-          pre.
-            <code>render status: NOT_FOUND</code>
         section
           h2 HTTP verbs
           ul
@@ -214,57 +204,179 @@ html(class="no-js", ng-app="main")
           h2 HTTP verbs in Grails
           p On each Controller
           pre.
-            <code>class Gr8LadyController {
+            <code class="java">class Gr8LadyController {
               static allowedMethods = [list: "GET", save: "POST", update: "PUT"]
             }</code>
         section
           h2 HTTP verbs in Grails
           p URL Mappings
           pre.
-            <code>"/gr8ladies"(resource: "gr8lady", method: "GET")</code>
+            <code class="java">"/gr8ladies"(resource: "gr8lady", method: "GET")</code>
         section
           h2 Endpoints
           h3 List
-          p <code>http://example.com/resource</code>
+          p <code class="http">http://example.com/resource</code>
           h3 Show
-          p <code>http://example.com/resource/{id}</code>
+          p <code class="http">http://example.com/resource/{id}</code>
         section
           h2 Endpoints
           ul
-            li <code>http://example.com/resource/{id}</code>
-            li.fragment NOT <code>http://example.com/resource?id=abc123</code>
-            li.fragment NOT <code>http://example.com/resource/{id}/?action=delete</code>
-            li.fragment NOT <code>http://example.com/resource/add</code>
+            li <code class="http">http://example.com/resource/{id}</code>
+            li.fragment NOT <code class="http">http://example.com/resource?id=abc123</code>
+            li.fragment NOT <code class="http">http://example.com/resource/{id}/?action=delete</code>
+            li.fragment NOT <code class="http">http://example.com/resource/add</code>
         section
-          h2 Multiple Media Types (JSON, XML, etc)
-
+          h2 Consistent Style
+          h3 casing
+          p <code class="http">/resources</code>
+          p NOT
+          p <code class="http">/ReSoUrCeS</code>
         section
-          h2 Consistent Styling
+          h2 Consistent URI style
+          p Try Either:
+          p <code class="http">/multiWordResources</code>
+          p Or:
+          p <code class="http">/multi-word-resources</code>
+          p And stick to it. Don't Mix and Match!
+        section
+          h2 Consistent Style
+          h3 Resource Names
+          p plural nouns preferred
+          <code>http://example.com/users</code>
+          p vs
+          <code>http://example.com/user</code>
+        section
+          h2 Multiple Media Types (JSON, XML)
           ul
-            li casing
-            ul
-              li
-                pre <code>http://example.com/resources</code>
-              li NOT
-                pre <code>http://example.com/ReSoUrCeS</code>
-              li Either:
-                pre <code>http://example.com/multiWordResources</code>
-              li Or:
-                pre <code>http://example.com/multi-word-resources</code>
-              li Don't Mix and Match
-            li resource names (plural preferred)
+            li XML and JSON are most common
         section
-          h2 Pagination
+          h2 Multiple Media Types (JSON, XML) in Grails
+          ul
+            li XML by default
+            li
+              p By Parameter
+              <code>http://example.com/resource.json</code>
+        section
+          h2 Multiple Media Types (JSON, XML) in Grails
+          p By Configuration
           pre.
-            <code>http://example.com/resource?offset=0&limit=10</code>
+            <code class="java">grails.mime.types = [
+              ...
+              json: ['application/json', 'text/json'],
+              ...
+              xml: ['text/xml', 'application/xml']
+            ]</code>
         section
-          h2 Marshalled responses
+          h2 Multiple Media Types (JSON, XML) in Grails
+          p By Resource
+          pre.
+            <code class="java">import grails.rest.Resource
+
+            @Resource(uri='/gr8ladies', formats=['json'])
+            class Gr8Lady {
+              ...
+            }</code>
         section
-          h2 HATEOAS
+          h2 Custom Response Formats
+          ul
+            li Filter from default responses
+            li Provide different responses per version
+            li Provide response formats based on security
+        section
+          h2 Custom Response Formats in Grails
+          p Object Marshallers
+          p <code>grails-app/init/Bootstrap.groovy</code>
+          pre.
+            <code class="java">import grails.converters.JSON
+
+            class Bootstrap {
+              def init = { servletContext ->
+                JSON.registerObjectMarshaller(Gr8Lady) {
+                  def returnArray = [:]
+                  returnArray['firstName'] = it.first
+                  returnArray['lastName'] = it.last
+                  returnArray['contribution'] = it.contribution.description
+                  return returnArray
+                }
+              }
+            }</code>
+          p Usage
+          pre.
+            <code>render gr8lady as JSON</code>
+        section
+          h2 Custom Response Formats in Grails
+          p Object Marshallers
+          pre.
+            <code>JSON.registerObjectMarshaller(new Gr8LadyMarshaller())</code>
+        section
+          h2 Custom Response Formats in Grails
+          p Object Marshallers
+          pre.
+            <code>class Gr8LadyMarshaller implements ObjectMarshaller&#60JSON&#62{
+                public boolean supports(Object object) {
+                  return object instanceof Gr8Lady
+                }
+
+                public void marshalObject(Object object, XML converter) {
+                  Gr8Lady gr8lady  = (Gr8Lady)object
+                  converter.chars gr8lady.displayName
+                }
+            }</code>
+        section
+          h2 Hypermedia As The Engine Of Application State (HATEOAS)<sup>*</sup>
+          p link to the resource and navigation
+          pre.
+            <code class="javascript">{
+              "_links": {
+                "self": { "href": "/gr8ladies" },
+                "next": [
+                  { "href": "/gr8ladies?page=2" }
+                ]
+              }
+            }</code>
+        section
+          h2 HATEOAS in Grails
+          ul
+            li JSON
+            li Hypertext Application Language (HAL)
+            p <code>grails-app/conf/spring/resources.groovy</code>
+            pre.
+              <code>import grails.rest.render.hal.*
+              beans = {
+                  halGr8LadyRenderer(HalJsonRenderer, org.gr8ladies.Gr8Lady)
+              }</code>
+        section
+          h2 HATEOAS in Grails
+          p Usage: Content Negotiation
+          p <code>curl -i -H "Accept: application/hal+json" http://localhost:8080/gr8ladies/1</code>
+          pre.
+            <code>HTTP/1.1 200 OK
+            Server: Apache-Coyote/1.1
+            Content-Type: application/hal+json;charset=ISO-8859-1
+
+            {
+              "_links": {
+                "self": {
+                  "href": "http://localhost:8080/gr8ladies/1",
+                  "hreflang": "en",
+                  "type": "application/hal+json"
+                }
+              },
+              "name": ""Grace Hopper""
+            }</code>
+        section
+          h2 Pagination<sup>*</sup>
+          p Parameters
+          p <code>http://example.com/resource?offset=0&max=10</code>
+          pre.
+            <code>def list() {
+              List gr8ladies = Gr8Lady.list(max: params.max, offset: params.offset)
+              respond [results: gr8ladies, max: params.max, offset: params.offset]
+            }</code>
         section
           h2 Versioning<sup>*</sup>
           ul
-            li <b>URI</b> <code>http://example.com/v1/resource/id</code>
+            li <b>URI</b> <code class="http">http://example.com/v1/resource/id</code>
             li <b>Custom Header</b>
             li
               pre.
@@ -283,23 +395,23 @@ html(class="no-js", ng-app="main")
             Another option is to add the version number to the headers. This maintains the purity of the URI, but makes it
             harder for consumers of the API. You can't just have a one button/link for the GET request.  The last option
             is to specify the version number in the accept header.
-
         section
           h2 Versioning in Grails
           ul
-            ul URI
-              li <code>"/gr8ladies/v1"</code>
-              li <code>"/gr8ladies/v2"</code>
-            ul Accept Header
-              li <code>"/gr8ladies(version:'1.0', resources:"gr8lady", namespace: 'v1')</code>
-              li <code>"/gr8ladies(version:'2.0', resources:"gr8lady", namespace: 'v2')</code>
+            ul <b>URI</b>
+              li <code class="http">@Resource(uri='/gr8ladies/v1')</code>
+              li <code class="http">@Resource(uri='/gr8ladies/v2')</code>
+            ul <b>Accept Header</b>
+              li <code class="http">"/gr8ladies(version:'1.0', resources:"gr8lady", namespace: 'v1')</code>
+              li <code class="http">"/gr8ladies(version:'2.0', resources:"gr8lady", namespace: 'v2')</code>
 
         section
           h2 Conclusions
           ul
             li REST is an architecture style, not a standard
             li There are many ways to implement REST
-            li Grails makes REST easy with <code>@Resource</code> and more!
+            li Grails makes REST easy with <code>@Resource</code>!
+            li Don't reinvent the wheel, use standard practices.
 
         section
           h3 Questions?
