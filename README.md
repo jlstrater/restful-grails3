@@ -1,16 +1,27 @@
-reveal-template
+Restful Grails 3
 ===============
 
-#OPI Reveal.js Template with new logos
+Integration is a key piece of modern software development. Whether integrating with external vendors or providing APIs for front-end technologies like AngularJS, REST has become the standard. This session will cover the basic principles of REST, how to create RESTful APIs in Grails, and end with a comparison of some of the plugins available.
 
-![Example slide 1](https://raw.githubusercontent.com/erickinsella/reveal-template/master/dist/assets/img/opi-revealjs-template.jpg)
+---
 
-![Example slide 2](https://raw.githubusercontent.com/erickinsella/reveal-template/master/dist/assets/img/opi-revealjs-template2.jpg)
+###Presented at [Gr8ConfEU](http://gr8conf.eu), and [Gr8ConfUS](http://gr8conf.us)
 
+####Copenhagen, Denmark
+#####04 June 2015
+
+####Minneapolis, MN USA
+#####30 July 2015
+
+----
+##Slides
+
+Based on the [OPI Reveal template](http://github.com/objectpartners/opi-reveal-template)
 
 ## Dependencies
 * Node
 * Bower
+* grunt-cli
 
 ##Getting Started
 * Run `npm install` to install node dependencies
@@ -25,7 +36,3 @@ reveal-template
   * Starts a server running on port 8000
   * watches for changes on project files
   * When files change, the assemble task is re-run and
-  * Livereload triggers browser update on assemble task completion
-* `grunt publish`
-  * Publishes slides to GitHub pages
-  * Uses git subtree merge to merge the contents of dist into the gh-pages branch
