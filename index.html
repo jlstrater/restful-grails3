@@ -57,8 +57,9 @@
             <li>Remedial REST</li>
             <li> Ways To Improve A RESTful API</li>
             <ul>
-              <li>with Grails 3 Examples</li>
+              <li>with Grails Examples</li>
             </ul>
+            <li>Related Grails Plugins</li>
           </ul>
         </section>
         <section>
@@ -73,6 +74,14 @@
           <h2>Remedial REST</h2>
         </section>
         <section>
+          <h2>Terminology</h2>
+          <ul>
+            <li>Application Programming Interface (API)</li>
+            <li>Web Service</li>
+            <li>Representational State Transfer (REST)</li>
+          </ul>
+        </section>
+        <section>
           <h2>Definition</h2>
           <blockquote>
             <b>RE</b>presentational <b>S</b>tate <b>T</b>ransfer (REST) is an architectural style that
@@ -82,6 +91,10 @@
           <aside class="notes">
             <NOT>a standard or specification</NOT>
           </aside>
+        </section>
+        <section>
+          <h2>History</h2>
+          <p>Described in Roy Fielding's 2000 PhD dissertation</p><small>Fielding, Roy. <ital><a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">Architectural Styles and the Design of Network-based Software Architectures<ital></a>. 2000.</small>
         </section>
         <section>
           <h2>Goals</h2>
@@ -98,7 +111,7 @@
           <ul>
             <li>Individual Resources are identified using URIs</li>
             <li>Resources are abstracted from the data source and can be manipulated before being sent to a client</li>
-            <li>Hypermedia is the engine for state transfer</li>
+            <li><b>Hypermedia As The Engine Of Application State (HATEOAS)</b></li>
           </ul>
         </section>
         <section>
@@ -123,6 +136,21 @@
           </ul>
         </section>
         <section>
+          <h2>Why choose REST?</h2>
+          <ul>
+            <li>Easy to implement</li>
+            <li>Usable across many different platforms and languages</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Why REST and Grails?</h2>
+          <p class="fragment">Many helpful defaults</p>
+          <ul class="fragment">Other advantages of Grails
+            <li>Ease of development</li>
+            <li>Shorter development time</li>
+          </ul>
+        </section>
+        <section>
           <h2>Questions about REST?</h2>
         </section>
         <section>
@@ -133,6 +161,18 @@
           <h2>Scope</h2>
           <p>De-coupled server and client</p>
           <p>NO GSPs!</p>
+        </section>
+        <section>
+          <h2>New in Grails 3</h2>
+          <ul>
+            <li>Based on Spring Boot</li>
+            <li>Switched to Gradle for build system</li>
+            <li>Major structural changes</li>
+            <ul>
+              <li>Configuration</li>
+              <li>Scripts</li>
+            </ul>
+          </ul>
         </section>
         <section>
           <h2>Getting Started</h2>
@@ -214,8 +254,6 @@ class Gr8Lady {
           <pre><code class="java">if(someCondition) {
   render status: 4XX
 }</code></pre>
-          <p>or</p>
-          <pre><code class="java">render status: NOT_FOUND</code></pre>
         </section>
         <section>
           <h2>HTTP verbs</h2>
@@ -281,6 +319,12 @@ class Gr8Lady {
           <p>vs</p><code>http://example.com/user</code>
         </section>
         <section>
+          <h2>Search</h2>
+          <ul><code>http://example.com/resource?fieldName=value</code>
+            <li>Lookup based on values</li>
+          </ul>
+        </section>
+        <section>
           <h2>Multiple Media Types (JSON, XML)</h2>
           <ul>
             <li>XML and JSON are most common</li>
@@ -297,13 +341,14 @@ class Gr8Lady {
         </section>
         <section>
           <h2>Multiple Media Types (JSON, XML) in Grails</h2>
-          <p>By Configuration</p>
-          <pre><code class="java">grails.mime.types = [
-  ...
-  json: ['application/json', 'text/json'],
-  ...
-  xml: ['text/xml', 'application/xml']
-]</code></pre>
+          <p>Available formats</p>
+          <pre><code class="java">grails:
+  mime:
+    types:
+    ...
+    json: ['application/json', 'text/json'],
+    ...
+    xml: ['text/xml', 'application/xml']</code></pre>
         </section>
         <section>
           <h2>Multiple Media Types (JSON, XML) in Grails</h2>
@@ -314,6 +359,15 @@ class Gr8Lady {
 class Gr8Lady {
   ...
 }</code></pre>
+          <p>Requesting another type returns a 406 (Not Acceptable)</p>
+        </section>
+        <section>
+          <h2>Multiple Media Types (JSON, XML) in Grails</h2>
+          <p>By RestfulController</p>
+          <pre><code>class Gr8LadyController extends RestfulController {
+  static responseFormats = ['json', 'xml']
+}</code></pre>
+          <p>Remember to add any response formats for versioned mime types</p>
         </section>
         <section>
           <h2>Custom Response Formats</h2>
@@ -335,7 +389,7 @@ class Bootstrap {
       def returnArray = [:]
       returnArray['firstName'] = it.first
       returnArray['lastName'] = it.last
-      returnArray['contribution'] = it.contribution.description
+      returnArray['chapter'] = it.chapter?.name
       return returnArray
     }
   }
@@ -346,7 +400,13 @@ class Bootstrap {
         <section>
           <h2>Custom Response Formats in Grails</h2>
           <p>Object Marshallers</p>
-          <pre><code>JSON.registerObjectMarshaller(new Gr8LadyMarshaller())</code></pre>
+          <p><code>grails-app/conf/spring/resources.groovy</code></p>
+          <pre><code class="java">import grails.converters.JSON
+import org.gr8ladies.ChapterMarshaller
+
+beans = {
+    JSON.registerObjectMarshaller(new ChapterMarshaller())
+}</code></pre>
         </section>
         <section>
           <h2>Custom Response Formats in Grails</h2>
@@ -417,7 +477,7 @@ Content-Type: application/hal+json;charset=ISO-8859-1
         <section>
           <h2>Versioning<sup>*</sup></h2>
           <ul>
-            <li><b>URI</b> <code class="http">http://example.com/v1/resource/id</code></li>
+            <li><b>URI</b> <code class="http">http://example.com/v1/resource/{id}</code></li>
             <li><b>Custom Header</b></li>
             <li>
               <pre><code class="http">GET https&#58;&#47;&#47;example.com/resource
@@ -447,10 +507,44 @@ Accept&#58; application/vnd.example.v2+json</code></pre>
               <li><code class="http">@Resource(uri='/gr8ladies/v2')</code></li>
             </ul>
             <ul><b>Accept Header</b>
-              <li><code class="http">"/gr8ladies(version:'1.0', resources:"gr8lady", namespace: 'v1')</code></li>
-              <li><code class="http">"/gr8ladies(version:'2.0', resources:"gr8lady", namespace: 'v2')</code></li>
+              <li><code class="http">"/gr8ladies"(version:'1.0', resources:"gr8lady", namespace: 'v1')</code></li>
+              <li><code class="http">"/gr8ladies"(version:'2.0', resources:"gr8lady", namespace: 'v2')</code></li>
             </ul>
           </ul>
+        </section>
+        <section>
+          <h2>Read-only Mode</h2>
+          <ul>
+            <li>for public APIs (or security)</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Read-only Mode in Grails</h2>
+          <pre><code>@Resource(uri="/gr8ladies", readOnly=true)
+class Gr8LadyController {
+  String first
+  ...
+}</code></pre>
+        </section>
+        <section>
+          <h2>Related Plugins for other Grails versions</h2>
+        </section>
+        <section>
+          <h2>Spring Security REST Plugin</h2>
+          <p>Token based Authentication based on Spring-Security</p>
+          <p><img class="inline-thumb" src="./assets/img/active-icon.png"/></p>
+          <p>Last Updated May 2015</p>
+          <p><a href="https://github.com/alvarosanchez/grails-spring-security-rest">Source & Documentation</a></p>
+        </section>
+        <section>
+          <h2>Restful API Plugin</h2>
+          <p>Last Updated November 2014</p>
+          <p><a href="https://github.com/restfulapi/restful-api">Source & Documentation</a></p>
+        </section>
+        <section>
+          <h2>Rest Renderer</h2>
+          <p>Last Updated February 2014</p>
+          <p><a href="https://github.com/danveloper/grails-rest-renderers">Source & Documentation</a></p>
         </section>
         <section>
           <h2>Conclusions</h2>
