@@ -1,6 +1,6 @@
 package org.gr8ladies
 
-class ContributionCategory {
+class Chapter {
 
     String name
 

@@ -7,9 +7,11 @@ class UrlMappings {
             }
         }
 
-        "/gr8ladies"(resources:"gr8lady") {
-            "/contribution"(controller:"contribution", method:"GET")
+        "/gr8ladies"(resources:"gr8lady", excludes:['delete']) {
+            "/chapters"(controller:"chapter", readOnly: true)
         }
+
+        "/v2/gr8ladies/$id"(resources: "gr8lady", controller: 'gr8ladyv2')
 
         "/"(view:"/index")
         "500"(view:'/error')

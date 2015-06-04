@@ -52,7 +52,8 @@ html(class="no-js", ng-app="main")
             li Remedial REST
             li  Ways To Improve A RESTful API
             ul
-              li with Grails 3 Examples
+              li with Grails Examples
+            li Related Grails Plugins
 
         section
           h2 What this talk will NOT cover
@@ -63,6 +64,14 @@ html(class="no-js", ng-app="main")
 
         section
           h2 Remedial REST
+
+        section
+          h2 Terminology
+          ul
+            li Application Programming Interface (API)
+            li Web Service
+            li Representational State Transfer (REST)
+
         section
           h2 Definition
           blockquote.
@@ -71,6 +80,11 @@ html(class="no-js", ng-app="main")
             of information and scalability.<ital>(Fischer 2013.)</ital>
           aside.notes
             NOT a standard or specification
+
+        section
+          h2 History
+          p Described in Roy Fielding's 2000 PhD dissertation
+          small Fielding, Roy. <ital><a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">Architectural Styles and the Design of Network-based Software Architectures<ital></a>. 2000.
         section
           h2 Goals
           ul
@@ -84,7 +98,7 @@ html(class="no-js", ng-app="main")
           ul
             li Individual Resources are identified using URIs
             li Resources are abstracted from the data source and can be manipulated before being sent to a client
-            li Hypermedia is the engine for state transfer
+            li <b>Hypermedia As The Engine Of Application State (HATEOAS)</b>
 
         section
           h2 Stateless
@@ -105,6 +119,19 @@ html(class="no-js", ng-app="main")
             li Allows for load balancing and intermediate security enforcers
 
         section
+          h2 Why choose REST?
+          ul
+            li Easy to implement
+            li Usable across many different platforms and languages
+
+        section
+          h2 Why REST and Grails?
+          p.fragment Many helpful defaults
+          ul.fragment Other advantages of Grails
+            li Ease of development
+            li Shorter development time
+
+        section
           h2 Questions about REST?
 
         section
@@ -115,6 +142,15 @@ html(class="no-js", ng-app="main")
           h2 Scope
           p De-coupled server and client
           p NO GSPs!
+        section
+          h2 New in Grails 3
+          ul
+            li Based on Spring Boot
+            li Switched to Gradle for build system
+            li Major structural changes
+            ul
+              li Configuration
+              li Scripts
 
         section
           h2 Getting Started
@@ -137,9 +173,9 @@ html(class="no-js", ng-app="main")
           p Or
           pre.
             <code class="java">"/gr8ladies"(resources:"gr8lady") {
-              "/contribution"(controller:"contribution", method:"GET")
+              "/chapter"(controller:"chapter", method:"GET")
             }</code>
-          small --> /gr8ladies/{id}/contribution
+          small --> /gr8ladies/{id}/chapter
         section
           h2 HTTP Status Codes
           ul
@@ -246,6 +282,11 @@ html(class="no-js", ng-app="main")
           p vs
           <code>http://example.com/user</code>
         section
+          h2 Search
+          ul <code>http://example.com/resource?fieldName=value</code>
+            li Lookup based on values
+
+        section
           h2 Multiple Media Types (JSON, XML)
           ul
             li XML and JSON are most common
@@ -258,14 +299,15 @@ html(class="no-js", ng-app="main")
               <code>http://example.com/resource.json</code>
         section
           h2 Multiple Media Types (JSON, XML) in Grails
-          p By Configuration
+          p Available formats
           pre.
-            <code class="java">grails.mime.types = [
-              ...
-              json: ['application/json', 'text/json'],
-              ...
-              xml: ['text/xml', 'application/xml']
-            ]</code>
+            <code class="java">grails:
+              mime:
+                types:
+                ...
+                json: ['application/json', 'text/json'],
+                ...
+                xml: ['text/xml', 'application/xml']</code>
         section
           h2 Multiple Media Types (JSON, XML) in Grails
           p By Resource
@@ -276,6 +318,15 @@ html(class="no-js", ng-app="main")
             class Gr8Lady {
               ...
             }</code>
+          p Requesting another type returns a 406 (Not Acceptable)
+        section
+          h2 Multiple Media Types (JSON, XML) in Grails
+          p By RestfulController
+          pre.
+            <code>class Gr8LadyController extends RestfulController {
+              static responseFormats = ['json', 'xml']
+            }</code>
+          p Remember to add any response formats for versioned mime types
         section
           h2 Custom Response Formats
           ul
@@ -295,7 +346,7 @@ html(class="no-js", ng-app="main")
                   def returnArray = [:]
                   returnArray['firstName'] = it.first
                   returnArray['lastName'] = it.last
-                  returnArray['contribution'] = it.contribution.description
+                  returnArray['chapter'] = it.chapter?.name
                   return returnArray
                 }
               }
@@ -306,8 +357,14 @@ html(class="no-js", ng-app="main")
         section
           h2 Custom Response Formats in Grails
           p Object Marshallers
+          p <code>grails-app/conf/spring/resources.groovy</code>
           pre.
-            <code>JSON.registerObjectMarshaller(new Gr8LadyMarshaller())</code>
+            <code class="java">import grails.converters.JSON
+            import org.gr8ladies.ChapterMarshaller
+
+            beans = {
+                JSON.registerObjectMarshaller(new ChapterMarshaller())
+            }</code>
         section
           h2 Custom Response Formats in Grails
           p Object Marshallers
@@ -376,7 +433,7 @@ html(class="no-js", ng-app="main")
         section
           h2 Versioning<sup>*</sup>
           ul
-            li <b>URI</b> <code class="http">http://example.com/v1/resource/id</code>
+            li <b>URI</b> <code class="http">http://example.com/v1/resource/{id}</code>
             li <b>Custom Header</b>
             li
               pre.
@@ -402,8 +459,41 @@ html(class="no-js", ng-app="main")
               li <code class="http">@Resource(uri='/gr8ladies/v1')</code>
               li <code class="http">@Resource(uri='/gr8ladies/v2')</code>
             ul <b>Accept Header</b>
-              li <code class="http">"/gr8ladies(version:'1.0', resources:"gr8lady", namespace: 'v1')</code>
-              li <code class="http">"/gr8ladies(version:'2.0', resources:"gr8lady", namespace: 'v2')</code>
+              li <code class="http">"/gr8ladies"(version:'1.0', resources:"gr8lady", namespace: 'v1')</code>
+              li <code class="http">"/gr8ladies"(version:'2.0', resources:"gr8lady", namespace: 'v2')</code>
+
+        section
+          h2 Read-only Mode
+          ul
+            li for public APIs (or security)
+
+        section
+          h2 Read-only Mode in Grails
+          pre.
+            <code>@Resource(uri="/gr8ladies", readOnly=true)
+            class Gr8LadyController {
+              String first
+              ...
+            }</code>
+        section
+          h2 Related Plugins for other Grails versions
+
+        section
+          h2 Spring Security REST Plugin
+          p Token based Authentication based on Spring-Security
+          p <img class="inline-thumb" src="./assets/img/active-icon.png"/>
+          p Last Updated May 2015
+          p <a href="https://github.com/alvarosanchez/grails-spring-security-rest">Source & Documentation</a>
+
+        section
+          h2 Restful API Plugin
+          p Last Updated November 2014
+          p <a href="https://github.com/restfulapi/restful-api">Source & Documentation</a>
+
+        section
+          h2 Rest Renderer
+          p Last Updated February 2014
+          p <a href="https://github.com/danveloper/grails-rest-renderers">Source & Documentation</a>
 
         section
           h2 Conclusions

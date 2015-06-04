@@ -1,4 +1,4 @@
-package trulygr8ladies
+package org.gr8ladies
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration
