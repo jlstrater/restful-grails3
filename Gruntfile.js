@@ -114,6 +114,16 @@ module.exports = function (grunt) {
           }
         ]
       },
+      previousVersions: {
+        files: [
+          {
+            expand: true,
+            cwd: 'src/Gr8ConfEU2015',
+            src: ['**'],
+            dest: 'dist/Gr8ConfEU2015'
+          }
+        ]
+      }
 
     },
 
