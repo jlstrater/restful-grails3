@@ -1,0 +1,12 @@
+{
+  "name": "headjs",
+  "homepage": "https://github.com/headjs/headjs",
+  "_release": "b8189f180c",
+  "_resolution": {
+    "type": "commit",
+    "commit": "b8189f180c340fa34a8e197d11bed47b7f03e78d"
+  },
+  "_source": "git://github.com/headjs/headjs.git",
+  "_target": "b8189f180c340fa34a8e197d11bed47b7f03e78d",
+  "_originalSource": "headjs"
+}

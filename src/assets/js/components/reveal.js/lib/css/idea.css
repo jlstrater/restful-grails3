@@ -1,0 +1,100 @@
+/*
+
+Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
+
+updated for reveal.js by Jenn Strater <jenn.strater@gmail.com>
+*/
+
+pre code {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #000;
+  background: #fff;
+  -webkit-text-size-adjust: none;
+}
+
+pre .shebang,
+pre .diff .addition,
+pre .comment,
+pre .java .annotation,
+pre .template_comment,
+pre .pi,
+pre .doctype {
+  color: #808080;
+  font-style: italic;
+}
+
+pre .shebang,
+pre .diff .addition,
+pre .comment,
+pre .java .annotation,
+pre .template_comment,
+pre .pi,
+pre .doctype {
+  color: #808000;
+}
+
+pre .tag,
+pre .pi {
+  background: #efefef;
+}
+
+pre .keyword,
+pre .tag,
+pre .django .tag,
+pre .django .keyword,
+pre .css .class,
+pre .css .id,
+pre .lisp .title {
+  font-weight: bold;
+  color: #000080;
+}
+
+pre .number,
+pre .date {
+  font-weight: bold;
+  color: #0000ff;
+}
+
+pre .number,
+pre .regexp {
+  font-weight: normal;
+}
+
+pre .diff .deletion,
+pre .string,
+pre .tag .value,
+pre .preprocessor,
+pre .built_in,
+pre .sql .aggregate,
+pre .javadoc,
+pre .smalltalk .class,
+pre .smalltalk .localvars,
+pre .smalltalk .array,
+pre .css .rules .value,
+pre .attr_selector,
+pre .pseudo,
+pre .apache .cbracket,
+pre .tex .formula {
+  color: #008000;
+  font-weight: bold;
+}
+
+pre .dos .winutils,
+pre .ruby .symbol,
+pre .ruby .symbol .string,
+pre .ruby .symbol .keyword,
+pre .ruby .symbol .keymethods,
+pre .ruby .string,
+pre .ruby .instancevar {
+  color: #000;
+  background: #d0eded;
+  font-style: italic;
+}
+
+pre .django .template_tag,
+pre .django .variable,
+pre .django .filter .argument {
+  color: #660e7a;
+}
