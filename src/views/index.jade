@@ -23,6 +23,8 @@ html(class="no-js", ng-app="main")
       .slides
         section(data-state="index-slide")
           h2 Restful Web Services in Grails 3
+          p
+            img(src='./assets/img/gr8conf2015.png', style="border:none;width:25%;")
           small by Jenn Strater <a href="http://twitter.com/jennstrater" target="_blank"><img style="border:none;margin-top:0px;box-shadow:none;" src="./assets/img/CompanyAndProductLogos/twitter.png"/>@jennstrater</a>
         section(data-state="github-slide", class="github-section")
           h1 <i class="fa fa-icon fa-github"></i>
@@ -41,44 +43,78 @@ html(class="no-js", ng-app="main")
         section
           h2 About Me
           p Professional
-          ul
-            li Senior Consultant - <a href="http://objectpartners.com" target="_blank">Object Partners</a>
-            li Full Stack Engineer
-            li Co-Founder - <a href="http://www.gr8ladies.org" target="_blank">Gr8Ladies</a>
+          ul.ul-no-style
+            li.
+              <img class="inline-img" src='./assets/img/opi-square-logo.png' style='vertical-align:middle;'>
+              Senior Consultant - <a href="http://objectpartners.com" target="_blank" style='vertical-align:middle'>Object Partners</a>
+            li.
+              <img class="inline-img" src='./assets/img/gr8ladies.png' style='vertical-align:middle;'>
+              Co-Founder - <a href="http://www.gr8ladies.org" target="_blank" style='vertical-align:middle'>Gr8Ladies</a>
+        section
+          h2 About Me
+          p Experience
+          img(src='./assets/img/techbooks.jpg')
+          small source: http://tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book/
         section
           h2 About Me
           p Minneapolis, MN
-          p <img style="border:none;margin-top:-25px;" src="./assets/img/minnesota.png"/>
+          p <img src='./assets/img/minnesota.png' style="border:none;margin-top:-25px;">
           ul.ul-no-style Connect on Social Media
             li <a href="https://twitter.com/jennstrater" target="_blank">Twitter</a> @jennstrater
             li <a href="https://linkedin.com/in/jennstrater" target="_blank">LinkedIn</a> https://linkedin.com/in/jennstrater
             li <a href="https://github.com/jlstrater" target="_blank">Github</a> https://github.com/jlstrater
 
         section
+          p <img src='./assets/img/secondhandhounds.png' style="border:none; width:12%; height:12%">
+          h3 Pet Mom & Foster
+          table(align="center")
+            tr
+              td Pumpkin
+              td <img class="inline-img" src='./assets/img/pumpkinloaf.jpg' style="border:none;">
+              td Halo
+              td <img class="inline-img" src='./assets/img/halofunnyface.jpg' style="border:none;">
+              td Gia
+              td <img class="inline-img" src='./assets/img/gia.jpg' style="border:none;">
+            tr
+              td Curly
+              td <img class="inline-img" src='./assets/img/curly.jpg' style="border:none;">
+              td Juliet
+              td <img class="inline-img" src='./assets/img/juliet.jpg' style="border:none;">
+              td Elway
+              td <img class="inline-img" src='./assets/img/elway.jpg' style="border:none;">
+
+        section
           h2 Agenda
           ul
+            li Overview & Relevance
             li Remedial REST
-            li  Ways To Improve A RESTful API
+            li 10 Ways To Improve A RESTful API
             ul
               li with Grails Examples
             li Related Grails Plugins
+            li Example
 
         section
           h2 What this talk will NOT cover
           ul
-            li Scalability of Grails APIs
+            li Performance and Scaling
             li Security
             li Ingesting RESTful APIs
+            li Documentation
+            li Testing
+
+        section
+          img(src='./assets/img/restbigpicture.png', style="border:none; width: 75%")
+
+        section
+          img(src='./assets/img/microservicearchitecture.png')
 
         section
           h2 Remedial REST
-
         section
-          h2 Terminology
-          ul
-            li Application Programming Interface (API)
-            li Web Service
-            li Representational State Transfer (REST)
+          h2 History
+          p Described in Roy Fielding's PhD dissertation in 2000
+          small Fielding, Roy. <ital><a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">Architectural Styles and the Design of Network-based Software Architectures<ital></a>. 2000.
 
         section
           h2 Definition
@@ -89,10 +125,6 @@ html(class="no-js", ng-app="main")
           aside.notes
             NOT a standard or specification
 
-        section
-          h2 History
-          p Described in Roy Fielding's 2000 PhD dissertation
-          small Fielding, Roy. <ital><a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">Architectural Styles and the Design of Network-based Software Architectures<ital></a>. 2000.
         section
           h2 Goals
           ul
@@ -134,22 +166,14 @@ html(class="no-js", ng-app="main")
 
         section
           h2 Why REST and Grails?
-          p.fragment Many helpful defaults
-          ul.fragment Other advantages of Grails
+          ul
+            li Many helpful defaults
             li Ease of development
             li Shorter development time
 
         section
-          h2 Questions about REST?
+          h2 Getting Started
 
-        section
-          h2 Ways To Improve A RESTful API
-          h3 (with Grails)
-
-        section
-          h2 Scope
-          p De-coupled server and client
-          p NO GSPs!
         section
           h2 New in Grails 3
           ul
@@ -159,6 +183,11 @@ html(class="no-js", ng-app="main")
             ul
               li Configuration
               li Scripts
+
+        section
+          h2 Scope
+          p De-coupled server and client means:
+          img(src='./assets/img/nogsps.png', style="border:none;width:50%;")
 
         section
           h2 Getting Started
@@ -184,10 +213,12 @@ html(class="no-js", ng-app="main")
               "/chapter"(controller:"chapter", method:"GET")
             }</code>
           small --> /gr8ladies/{id}/chapter
+
         section
-          h2 HTTP Status Codes
-          ul
-            li 200 is ok ... but not for everything
+          h2 10 Ways To Improve A RESTful API
+          h3 with Grails Examples
+        section
+          h2 1. Use Appropriate HTTP Status Codes
         section
           h2 HTTP Status Codes
           p Learn the correct status codes for different errors
@@ -226,15 +257,69 @@ html(class="no-js", ng-app="main")
           small
             span an exerpt from
             a(href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html", target="_blank") http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+
+        section
+          h2 Presenting:
+          h3 HTTP Status Pets & Fosters
+          p Based on <a href="http://httpstatusdogs.com/">HTTP Status Dogs</a> and <a href="https://www.flickr.com/photos/girliemac/sets/72157628409467125">HTTP Status Cats</a>
+
+        section
+          h2 2xx
+          table
+            tr
+              td
+                img(src='./assets/img/HTTPStatusFosters/200OKJulie.jpg', style="width: 250px;border:none;")
+              td
+                img(src='./assets/img/HTTPStatusFosters/203NonAuthoritativePumpkin.jpg', style="width: 250px;border:none;")
+              td
+                img(src='./assets/img/HTTPStatusFosters/204NoContentHalo.jpg', style="width: 250px;border:none;")
+              td
+                img(src='./assets/img/HTTPStatusFosters/206PartialContentPumpkin.jpg', style="width: 250px;border:none;")
+        section
+          h2 3xx
+          table
+              tr
+                td
+                  img(src='./assets/img/HTTPStatusFosters/300MultipleChoices.jpg', style="width: 250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/302Found.jpg', style="width: 250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/303SeeOther.jpg', style="width: 250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/307TemporaryRedirect.jpg', style="width: 250px;border:none;")
+        section
+          h2 4xx
+          table
+              tr
+                td
+                  img(src='./assets/img/HTTPStatusFosters/400BadHalo.jpg', style="width: 250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/424FailedDependencyPumpkin.jpg', style="width: 250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/444NoResponseHalo.jpg', style="width: 250px;border:none;")
+        section
+          h2 5xx
+          table
+              tr
+                td
+                  img(src='./assets/img/HTTPStatusFosters/503UnavailableCurly.jpg', style="width:250px;border:none;")
+        section
+          h2 Do's and Dont's
+          ul
+            li 200 is ok ... but not for everything
+            li <b>DON'T</b> expect the end user to parse through the message for an error
+            li <b>DO</b> Use an appropriate HTTP Error Response
         section
           h2 HTTP Status Codes in Grails
           p Many of the cases are handled by Grails or the server(i.e. 5XXs)
+        section
+          h2 HTTP Status Codes in Grails
           pre.
             <code class="java">if(someCondition) {
               render status: 4XX
             }</code>
         section
-          h2 HTTP verbs
+          h2 2. Use the right HTTP verbs
           ul
             li GET to retrieve a resource
             li POST to create a new resource
@@ -256,8 +341,9 @@ html(class="no-js", ng-app="main")
           p URL Mappings
           pre.
             <code class="java">"/gr8ladies"(resource: "gr8lady", method: "GET")</code>
+
         section
-          h2 Endpoints
+          h2 3. Name Endpoints Consistently and Appropriately
           h3 List
           p <code class="http">http://example.com/resource</code>
           h3 Show
@@ -270,7 +356,7 @@ html(class="no-js", ng-app="main")
             li.fragment NOT <code class="http">http://example.com/resource/{id}/?action=delete</code>
             li.fragment NOT <code class="http">http://example.com/resource/add</code>
         section
-          h2 Consistent Style
+          h2 4. Style Consistently
           h3 casing
           p <code class="http">/resources</code>
           p NOT
@@ -290,12 +376,12 @@ html(class="no-js", ng-app="main")
           p vs
           <code>http://example.com/user</code>
         section
-          h2 Search
+          h2 5. Provide Search Functionality
           ul <code>http://example.com/resource?fieldName=value</code>
             li Lookup based on values
 
         section
-          h2 Multiple Media Types (JSON, XML)
+          h2 6. Support Multiple Media Types (JSON, XML)
           ul
             li XML and JSON are most common
         section
@@ -336,7 +422,7 @@ html(class="no-js", ng-app="main")
             }</code>
           p Remember to add any response formats for versioned mime types
         section
-          h2 Custom Response Formats
+          h2 7. Provide Custom Response Formats
           ul
             li Filter from default responses
             li Provide different responses per version
@@ -388,7 +474,7 @@ html(class="no-js", ng-app="main")
                 }
             }</code>
         section
-          h2 Hypermedia As The Engine Of Application State (HATEOAS)<sup>*</sup>
+          h2 8. Use Hypermedia As The Engine Of Application State (HATEOAS)<sup>*</sup>
           p link to the resource and navigation
           pre.
             <code class="javascript">{
@@ -430,7 +516,7 @@ html(class="no-js", ng-app="main")
               "name": ""Grace Hopper""
             }</code>
         section
-          h2 Pagination<sup>*</sup>
+          h2 9. Or Use Pagination<sup>*</sup>
           p Parameters
           p <code>http://example.com/resource?offset=0&max=10</code>
           pre.
@@ -439,7 +525,7 @@ html(class="no-js", ng-app="main")
               respond [results: gr8ladies, max: params.max, offset: params.offset]
             }</code>
         section
-          h2 Versioning<sup>*</sup>
+          h2 And Versioning<sup>*</sup>
           ul
             li <b>URI</b> <code class="http">http://example.com/v1/resource/{id}</code>
             li <b>Custom Header</b>
@@ -508,15 +594,15 @@ html(class="no-js", ng-app="main")
           ul
             li REST is an architecture style, not a standard
             li There are many ways to implement REST
-            li Grails makes REST easy with <code>@Resource</code>!
+            li Grails makes implementing REST easy!
             li Don't reinvent the wheel, use standard practices.
 
         section
           h3 Questions?
-          <img src='./assets/img/halofunnyface.jpg' style="border:none;margin:0px;">
-          <img src='./assets/img/pumpkinloaf.jpg' style="border:none;">
-          <img src='./assets/img/upsidedownpumpkin.jpg' style="border:none;">
-          <img src='./assets/img/halopanic.jpg' style="border:none;margin:0px;">
+          h1
+            img(src='./assets/img/halopanic.jpg', style="border:none;margin:0px;height:500px;width:600px;")
+          p <a href="http://twitter.com/jennstrater" target="_blank"><img style="border:none;margin:0px;box-shadow:none;" src="./assets/img/CompanyAndProductLogos/twitter.png"/>@jennstrater</a>
+          p jenn@gr8ladies.org
 
         section
           h2 References

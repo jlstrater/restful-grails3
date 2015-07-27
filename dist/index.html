@@ -25,7 +25,8 @@
       <div class="opi-logo"></div>
       <div class="slides">
         <section data-state="index-slide">
-          <h2>Restful Web Services in Grails 3</h2><small>by Jenn Strater <a href="http://twitter.com/jennstrater" target="_blank"><img style="border:none;margin-top:0px;box-shadow:none;" src="./assets/img/CompanyAndProductLogos/twitter.png"/>@jennstrater</a></small>
+          <h2>Restful Web Services in Grails 3</h2>
+          <p><img src="./assets/img/gr8conf2015.png" style="border:none;width:25%;"></p><small>by Jenn Strater <a href="http://twitter.com/jennstrater" target="_blank"><img style="border:none;margin-top:0px;box-shadow:none;" src="./assets/img/CompanyAndProductLogos/twitter.png"/>@jennstrater</a></small>
         </section>
         <section data-state="github-slide" class="github-section">
           <h1><i class="fa fa-icon fa-github"></i></h1>
@@ -41,16 +42,25 @@
         <section>
           <h2>About Me</h2>
           <p>Professional</p>
-          <ul>
-            <li>Senior Consultant - <a href="http://objectpartners.com" target="_blank">Object Partners</a></li>
-            <li>Full Stack Engineer</li>
-            <li>Co-Founder - <a href="http://www.gr8ladies.org" target="_blank">Gr8Ladies</a></li>
+          <ul class="ul-no-style">
+            <li>
+              <img class="inline-img" src='./assets/img/opi-square-logo.png' style='vertical-align:middle;'>
+              Senior Consultant - <a href="http://objectpartners.com" target="_blank" style='vertical-align:middle'>Object Partners</a>
+            </li>
+            <li>
+              <img class="inline-img" src='./assets/img/gr8ladies.png' style='vertical-align:middle;'>
+              Co-Founder - <a href="http://www.gr8ladies.org" target="_blank" style='vertical-align:middle'>Gr8Ladies</a>
+            </li>
           </ul>
         </section>
         <section>
           <h2>About Me</h2>
+          <p>Experience</p><img src="./assets/img/techbooks.jpg"><small>source: http://tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book/</small>
+        </section>
+        <section>
+          <h2>About Me</h2>
           <p>Minneapolis, MN</p>
-          <p><img style="border:none;margin-top:-25px;" src="./assets/img/minnesota.png"/></p>
+          <p><img src='./assets/img/minnesota.png' style="border:none;margin-top:-25px;"></p>
           <ul class="ul-no-style">Connect on Social Media
             <li><a href="https://twitter.com/jennstrater" target="_blank">Twitter</a> @jennstrater</li>
             <li><a href="https://linkedin.com/in/jennstrater" target="_blank">LinkedIn</a> https://linkedin.com/in/jennstrater</li>
@@ -58,34 +68,58 @@
           </ul>
         </section>
         <section>
+          <p><img src='./assets/img/secondhandhounds.png' style="border:none; width:12%; height:12%"></p>
+          <h3>Pet Mom & Foster</h3>
+          <table align="center">
+            <tr>
+              <td>Pumpkin</td>
+              <td><img class="inline-img" src='./assets/img/pumpkinloaf.jpg' style="border:none;"></td>
+              <td>Halo</td>
+              <td><img class="inline-img" src='./assets/img/halofunnyface.jpg' style="border:none;"></td>
+              <td>Gia</td>
+              <td><img class="inline-img" src='./assets/img/gia.jpg' style="border:none;"></td>
+            </tr>
+            <tr>
+              <td>Curly</td>
+              <td><img class="inline-img" src='./assets/img/curly.jpg' style="border:none;"></td>
+              <td>Juliet</td>
+              <td><img class="inline-img" src='./assets/img/juliet.jpg' style="border:none;"></td>
+              <td>Elway</td>
+              <td><img class="inline-img" src='./assets/img/elway.jpg' style="border:none;"></td>
+            </tr>
+          </table>
+        </section>
+        <section>
           <h2>Agenda</h2>
           <ul>
+            <li>Overview & Relevance</li>
             <li>Remedial REST</li>
-            <li> Ways To Improve A RESTful API</li>
+            <li>10 Ways To Improve A RESTful API</li>
             <ul>
               <li>with Grails Examples</li>
             </ul>
             <li>Related Grails Plugins</li>
+            <li>Example</li>
           </ul>
         </section>
         <section>
           <h2>What this talk will NOT cover</h2>
           <ul>
-            <li>Scalability of Grails APIs</li>
+            <li>Performance and Scaling</li>
             <li>Security</li>
             <li>Ingesting RESTful APIs</li>
+            <li>Documentation</li>
+            <li>Testing</li>
           </ul>
         </section>
+        <section><img src="./assets/img/restbigpicture.png" style="border:none; width: 75%"></section>
+        <section><img src="./assets/img/microservicearchitecture.png"></section>
         <section>
           <h2>Remedial REST</h2>
         </section>
         <section>
-          <h2>Terminology</h2>
-          <ul>
-            <li>Application Programming Interface (API)</li>
-            <li>Web Service</li>
-            <li>Representational State Transfer (REST)</li>
-          </ul>
+          <h2>History</h2>
+          <p>Described in Roy Fielding's PhD dissertation in 2000</p><small>Fielding, Roy. <ital><a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">Architectural Styles and the Design of Network-based Software Architectures<ital></a>. 2000.</small>
         </section>
         <section>
           <h2>Definition</h2>
@@ -97,10 +131,6 @@
           <aside class="notes">
             <NOT>a standard or specification</NOT>
           </aside>
-        </section>
-        <section>
-          <h2>History</h2>
-          <p>Described in Roy Fielding's 2000 PhD dissertation</p><small>Fielding, Roy. <ital><a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">Architectural Styles and the Design of Network-based Software Architectures<ital></a>. 2000.</small>
         </section>
         <section>
           <h2>Goals</h2>
@@ -150,23 +180,14 @@
         </section>
         <section>
           <h2>Why REST and Grails?</h2>
-          <p class="fragment">Many helpful defaults</p>
-          <ul class="fragment">Other advantages of Grails
+          <ul>
+            <li>Many helpful defaults</li>
             <li>Ease of development</li>
             <li>Shorter development time</li>
           </ul>
         </section>
         <section>
-          <h2>Questions about REST?</h2>
-        </section>
-        <section>
-          <h2>Ways To Improve A RESTful API</h2>
-          <h3>(with Grails)</h3>
-        </section>
-        <section>
-          <h2>Scope</h2>
-          <p>De-coupled server and client</p>
-          <p>NO GSPs!</p>
+          <h2>Getting Started</h2>
         </section>
         <section>
           <h2>New in Grails 3</h2>
@@ -179,6 +200,10 @@
               <li>Scripts</li>
             </ul>
           </ul>
+        </section>
+        <section>
+          <h2>Scope</h2>
+          <p>De-coupled server and client means:</p><img src="./assets/img/nogsps.png" style="border:none;width:50%;">
         </section>
         <section>
           <h2>Getting Started</h2>
@@ -203,10 +228,11 @@ class Gr8Lady {
 }</code></pre><small>--> /gr8ladies/{id}/chapter</small>
         </section>
         <section>
-          <h2>HTTP Status Codes</h2>
-          <ul>
-            <li>200 is ok ... but not for everything</li>
-          </ul>
+          <h2>10 Ways To Improve A RESTful API</h2>
+          <h3>with Grails Examples</h3>
+        </section>
+        <section>
+          <h2>1. Use Appropriate HTTP Status Codes</h2>
         </section>
         <section>
           <h2>HTTP Status Codes</h2>
@@ -255,14 +281,70 @@ class Gr8Lady {
           </table><small><span>an exerpt from</span><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html" target="_blank">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</a></small>
         </section>
         <section>
+          <h2>Presenting:</h2>
+          <h3>HTTP Status Pets & Fosters</h3>
+          <p>Based on <a href="http://httpstatusdogs.com/">HTTP Status Dogs</a> and <a href="https://www.flickr.com/photos/girliemac/sets/72157628409467125">HTTP Status Cats</a></p>
+        </section>
+        <section>
+          <h2>2xx</h2>
+          <table>
+            <tr>
+              <td><img src="./assets/img/HTTPStatusFosters/200OKJulie.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/203NonAuthoritativePumpkin.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/204NoContentHalo.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/206PartialContentPumpkin.jpg" style="width: 250px;border:none;"></td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>3xx</h2>
+          <table>
+            <tr>
+              <td><img src="./assets/img/HTTPStatusFosters/300MultipleChoices.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/302Found.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/303SeeOther.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/307TemporaryRedirect.jpg" style="width: 250px;border:none;"></td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>4xx</h2>
+          <table>
+            <tr>
+              <td><img src="./assets/img/HTTPStatusFosters/400BadHalo.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/424FailedDependencyPumpkin.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/444NoResponseHalo.jpg" style="width: 250px;border:none;"></td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>5xx</h2>
+          <table>
+            <tr>
+              <td><img src="./assets/img/HTTPStatusFosters/503UnavailableCurly.jpg" style="width:250px;border:none;"></td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h2>Do's and Dont's</h2>
+          <ul>
+            <li>200 is ok ... but not for everything</li>
+            <li><b>DON'T</b> expect the end user to parse through the message for an error</li>
+            <li><b>DO</b> Use an appropriate HTTP Error Response</li>
+          </ul>
+        </section>
+        <section>
           <h2>HTTP Status Codes in Grails</h2>
           <p>Many of the cases are handled by Grails or the server(i.e. 5XXs)</p>
+        </section>
+        <section>
+          <h2>HTTP Status Codes in Grails</h2>
           <pre><code class="java">if(someCondition) {
   render status: 4XX
 }</code></pre>
         </section>
         <section>
-          <h2>HTTP verbs</h2>
+          <h2>2. Use the right HTTP verbs</h2>
           <ul>
             <li>GET to retrieve a resource</li>
             <li>POST to create a new resource</li>
@@ -285,10 +367,11 @@ class Gr8Lady {
         <section>
           <h2>HTTP verbs in Grails</h2>
           <p>URL Mappings</p>
-          <pre><code class="java">"/gr8ladies"(resource: "gr8lady", method: "GET")</code></pre>
+          <pre><code class="java">"/gr8ladies"(resource: "gr8lady", method: "GET")</code>
+</pre>
         </section>
         <section>
-          <h2>Endpoints</h2>
+          <h2>3. Name Endpoints Consistently and Appropriately</h2>
           <h3>List</h3>
           <p><code class="http">http://example.com/resource</code></p>
           <h3>Show</h3>
@@ -304,7 +387,7 @@ class Gr8Lady {
           </ul>
         </section>
         <section>
-          <h2>Consistent Style</h2>
+          <h2>4. Style Consistently</h2>
           <h3>casing</h3>
           <p><code class="http">/resources</code></p>
           <p>NOT</p>
@@ -325,13 +408,13 @@ class Gr8Lady {
           <p>vs</p><code>http://example.com/user</code>
         </section>
         <section>
-          <h2>Search</h2>
+          <h2>5. Provide Search Functionality</h2>
           <ul><code>http://example.com/resource?fieldName=value</code>
             <li>Lookup based on values</li>
           </ul>
         </section>
         <section>
-          <h2>Multiple Media Types (JSON, XML)</h2>
+          <h2>6. Support Multiple Media Types (JSON, XML)</h2>
           <ul>
             <li>XML and JSON are most common</li>
           </ul>
@@ -376,7 +459,7 @@ class Gr8Lady {
           <p>Remember to add any response formats for versioned mime types</p>
         </section>
         <section>
-          <h2>Custom Response Formats</h2>
+          <h2>7. Provide Custom Response Formats</h2>
           <ul>
             <li>Filter from default responses</li>
             <li>Provide different responses per version</li>
@@ -429,7 +512,7 @@ beans = {
 }</code></pre>
         </section>
         <section>
-          <h2>Hypermedia As The Engine Of Application State (HATEOAS)<sup>*</sup></h2>
+          <h2>8. Use Hypermedia As The Engine Of Application State (HATEOAS)<sup>*</sup></h2>
           <p>link to the resource and navigation</p>
           <pre><code class="javascript">{
   "_links": {
@@ -472,7 +555,7 @@ Content-Type: application/hal+json;charset=ISO-8859-1
 }</code></pre>
         </section>
         <section>
-          <h2>Pagination<sup>*</sup></h2>
+          <h2>9. Or Use Pagination<sup>*</sup></h2>
           <p>Parameters</p>
           <p><code>http://example.com/resource?offset=0&max=10</code></p>
           <pre><code>def list() {
@@ -481,7 +564,7 @@ Content-Type: application/hal+json;charset=ISO-8859-1
 }</code></pre>
         </section>
         <section>
-          <h2>Versioning<sup>*</sup></h2>
+          <h2>And Versioning<sup>*</sup></h2>
           <ul>
             <li><b>URI</b> <code class="http">http://example.com/v1/resource/{id}</code></li>
             <li><b>Custom Header</b></li>
@@ -557,15 +640,15 @@ class Gr8Lady {
           <ul>
             <li>REST is an architecture style, not a standard</li>
             <li>There are many ways to implement REST</li>
-            <li>Grails makes REST easy with <code>@Resource</code>!</li>
+            <li>Grails makes implementing REST easy!</li>
             <li>Don't reinvent the wheel, use standard practices.</li>
           </ul>
         </section>
         <section>
-          <h3>Questions?</h3><img src='./assets/img/halofunnyface.jpg' style="border:none;margin:0px;">
-          <img src='./assets/img/pumpkinloaf.jpg' style="border:none;">
-          <img src='./assets/img/upsidedownpumpkin.jpg' style="border:none;">
-          <img src='./assets/img/halopanic.jpg' style="border:none;margin:0px;">
+          <h3>Questions?</h3>
+          <h1><img src="./assets/img/halopanic.jpg" style="border:none;margin:0px;height:500px;width:600px;"></h1>
+          <p><a href="http://twitter.com/jennstrater" target="_blank"><img style="border:none;margin:0px;box-shadow:none;" src="./assets/img/CompanyAndProductLogos/twitter.png"/>@jennstrater</a></p>
+          <p>jenn@gr8ladies.org</p>
         </section>
         <section>
           <h2>References</h2>
