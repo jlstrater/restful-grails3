@@ -55,7 +55,7 @@
         </section>
         <section>
           <h2>About Me</h2>
-          <p>Experience</p><img src="./assets/img/techbooks.jpg"><small>source: http://tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book/</small>
+          <p>Experience</p><img src="./assets/img/techbooks.jpg" style="width: 60%;"><small>source: http://tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book/</small>
         </section>
         <section>
           <h2>About Me</h2>
@@ -92,13 +92,11 @@
         <section>
           <h2>Agenda</h2>
           <ul>
-            <li>Overview & Relevance</li>
             <li>Remedial REST</li>
             <li>10 Ways To Improve A RESTful API</li>
             <ul>
               <li>with Grails Examples</li>
             </ul>
-            <li>Related Grails Plugins</li>
             <li>Example</li>
           </ul>
         </section>
@@ -112,8 +110,6 @@
             <li>Testing</li>
           </ul>
         </section>
-        <section><img src="./assets/img/restbigpicture.png" style="border:none; width: 75%"></section>
-        <section><img src="./assets/img/microservicearchitecture.png"></section>
         <section>
           <h2>Remedial REST</h2>
         </section>
@@ -144,14 +140,18 @@
         </section>
         <section>
           <h2>Uniform Interface</h2>
-          <ul>
-            <li>Individual Resources are identified using URIs</li>
-            <li>Resources are abstracted from the data source and can be manipulated before being sent to a client</li>
-            <li><b>Hypermedia As The Engine Of Application State (HATEOAS)</b></li>
-          </ul>
+          <p>Individual Resources are identified using URIs</p><img src="./assets/img/individualresources.png" style="border:none;">
         </section>
         <section>
-          <h2>Stateless</h2>
+          <h2>Uniform Interface</h2>
+          <p>Resources are abstracted from the data source and can be manipulated before being sent to a client</p><img src="./assets/img/resourceabstraction.png" style="border:none;height:75%;">
+        </section>
+        <section>
+          <h2>Uniform Interface</h2>
+          <p><b>Hypermedia As The Engine Of Application State (HATEOAS)</b></p>
+        </section>
+        <section>
+          <h2>Stateless</h2><img src="./assets/img/isolatedrequests.png" style="border:none;width:35%;">
           <ul>Self-contained and independent requests
             <li>Improves scalability</li>
             <li>Allows for parallel processing of requests</li>
@@ -166,7 +166,7 @@
           </ul>
         </section>
         <section>
-          <h2>Layered System</h2>
+          <h2>Layered System</h2><img src="./assets/img/intermediaryendpoints.png" style="border:none; width:50%;">
           <ul>Endpoints can be the terminus or an intermediary service
             <li>Allows for load balancing and intermediate security enforcers</li>
           </ul>
@@ -178,6 +178,7 @@
             <li>Usable across many different platforms and languages</li>
           </ul>
         </section>
+        <section><img src="./assets/img/microservicearchitecture.png"></section>
         <section>
           <h2>Why REST and Grails?</h2>
           <ul>
@@ -224,8 +225,8 @@ class Gr8Lady {
 "/gr8ladies"(resources:"gr8lady")</code></pre>
           <p>Or</p>
           <pre><code class="java">"/gr8ladies"(resources:"gr8lady") {
-  "/chapter"(controller:"chapter", method:"GET")
-}</code></pre><small>--> /gr8ladies/{id}/chapter</small>
+  "/chapters"(controller:"chapter", method:"GET")
+}</code></pre><small>--> /gr8ladies/{id}/chapters</small>
         </section>
         <section>
           <h2>10 Ways To Improve A RESTful API</h2>
@@ -290,9 +291,9 @@ class Gr8Lady {
           <table>
             <tr>
               <td><img src="./assets/img/HTTPStatusFosters/200OKJulie.jpg" style="width: 250px;border:none;"></td>
-              <td><img src="./assets/img/HTTPStatusFosters/203NonAuthoritativePumpkin.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/203NonAuthoritativePumpkin.JPG" style="width: 250px;border:none;"></td>
               <td><img src="./assets/img/HTTPStatusFosters/204NoContentHalo.jpg" style="width: 250px;border:none;"></td>
-              <td><img src="./assets/img/HTTPStatusFosters/206PartialContentPumpkin.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/206PartialContentPumpkin.JPG" style="width: 250px;border:none;"></td>
             </tr>
           </table>
         </section>
@@ -312,7 +313,14 @@ class Gr8Lady {
           <table>
             <tr>
               <td><img src="./assets/img/HTTPStatusFosters/400BadHalo.jpg" style="width: 250px;border:none;"></td>
-              <td><img src="./assets/img/HTTPStatusFosters/424FailedDependencyPumpkin.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/404NotFound.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/406NotAcceptable.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/409Conflict.jpg" style="width: 250px; border:none;"></td>
+            </tr>
+            <tr>
+              <td><img src="./assets/img/HTTPStatusFosters/423Locked.jpg" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/424FailedDependencyPumpkin.JPG" style="width: 250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/431RequestHeaderTooLarge.jpg" style="width: 250px;border:none;"></td>
               <td><img src="./assets/img/HTTPStatusFosters/444NoResponseHalo.jpg" style="width: 250px;border:none;"></td>
             </tr>
           </table>
@@ -321,7 +329,10 @@ class Gr8Lady {
           <h2>5xx</h2>
           <table>
             <tr>
-              <td><img src="./assets/img/HTTPStatusFosters/503UnavailableCurly.jpg" style="width:250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/502BadGateway.jpg" style="width:250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/503UnavailableCurly.JPG" style="width:250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/504GatewayTimeout.jpg" style="width:250px;border:none;"></td>
+              <td><img src="./assets/img/HTTPStatusFosters/599NetworkTimeoutError.jpg" style="width:250px;border:none;"></td>
             </tr>
           </table>
         </section>
@@ -367,8 +378,7 @@ class Gr8Lady {
         <section>
           <h2>HTTP verbs in Grails</h2>
           <p>URL Mappings</p>
-          <pre><code class="java">"/gr8ladies"(resource: "gr8lady", method: "GET")</code>
-</pre>
+          <pre><code class="java">"/gr8ladies"(resource: "gr8lady", method: "GET")</code></pre>
         </section>
         <section>
           <h2>3. Name Endpoints Consistently and Appropriately</h2>
@@ -551,7 +561,7 @@ Content-Type: application/hal+json;charset=ISO-8859-1
       "type": "application/hal+json"
     }
   },
-  "name": ""Grace Hopper""
+  "name": "Grace Hopper"
 }</code></pre>
         </section>
         <section>
@@ -604,7 +614,8 @@ Accept&#58; application/vnd.example.v2+json</code></pre>
         <section>
           <h2>Read-only Mode</h2>
           <ul>
-            <li>for public APIs (or security)</li>
+            <li>for public APIs</li>
+            <li>or as a security measure</li>
           </ul>
         </section>
         <section>
@@ -616,6 +627,9 @@ class Gr8Lady {
 }</code></pre>
         </section>
         <section>
+          <h2>Example</h2>
+        </section>
+        <section>
           <h2>Related Plugins for other Grails versions</h2>
         </section>
         <section>
@@ -624,14 +638,17 @@ class Gr8Lady {
           <p><img class="inline-thumb" src="./assets/img/active-icon.png"/></p>
           <p>Last Updated May 2015</p>
           <p><a href="https://github.com/alvarosanchez/grails-spring-security-rest">Source & Documentation</a></p>
+          <p>Greach 2014</p><a href="https://www.youtube.com/watch?v=Va2OlHQdonI">Video</a>
         </section>
         <section>
           <h2>Restful API Plugin</h2>
+          <p>For more complicated APIs</p>
           <p>Last Updated November 2014</p>
           <p><a href="https://github.com/restfulapi/restful-api">Source & Documentation</a></p>
         </section>
         <section>
           <h2>Rest Renderer</h2>
+          <p>For greater control over data output</p>
           <p>Last Updated February 2014</p>
           <p><a href="https://github.com/danveloper/grails-rest-renderers">Source & Documentation</a></p>
         </section>

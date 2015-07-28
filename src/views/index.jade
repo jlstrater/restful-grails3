@@ -53,7 +53,7 @@ html(class="no-js", ng-app="main")
         section
           h2 About Me
           p Experience
-          img(src='./assets/img/techbooks.jpg')
+          img(src='./assets/img/techbooks.jpg', style="width: 60%;")
           small source: http://tjvantoll.com/2014/12/29/so-you-want-to-write-a-tech-book/
         section
           h2 About Me
@@ -86,12 +86,10 @@ html(class="no-js", ng-app="main")
         section
           h2 Agenda
           ul
-            li Overview & Relevance
             li Remedial REST
             li 10 Ways To Improve A RESTful API
             ul
               li with Grails Examples
-            li Related Grails Plugins
             li Example
 
         section
@@ -102,12 +100,6 @@ html(class="no-js", ng-app="main")
             li Ingesting RESTful APIs
             li Documentation
             li Testing
-
-        section
-          img(src='./assets/img/restbigpicture.png', style="border:none; width: 75%")
-
-        section
-          img(src='./assets/img/microservicearchitecture.png')
 
         section
           h2 Remedial REST
@@ -135,13 +127,19 @@ html(class="no-js", ng-app="main")
           h1 Characteristics
         section
           h2 Uniform Interface
-          ul
-            li Individual Resources are identified using URIs
-            li Resources are abstracted from the data source and can be manipulated before being sent to a client
-            li <b>Hypermedia As The Engine Of Application State (HATEOAS)</b>
+          p Individual Resources are identified using URIs
+          img(src='./assets/img/individualresources.png', style="border:none;")
+        section
+          h2 Uniform Interface
+          p Resources are abstracted from the data source and can be manipulated before being sent to a client
+          img(src='./assets/img/resourceabstraction.png', style="border:none;height:75%;")
+        section
+          h2 Uniform Interface
+          p <b>Hypermedia As The Engine Of Application State (HATEOAS)</b>
 
         section
           h2 Stateless
+          img(src='./assets/img/isolatedrequests.png', style="border:none;width:35%;")
           ul Self-contained and independent requests
             li Improves scalability
             li Allows for parallel processing of requests
@@ -155,6 +153,7 @@ html(class="no-js", ng-app="main")
 
         section
           h2 Layered System
+          img(src='./assets/img/intermediaryendpoints.png', style="border:none; width:50%;")
           ul Endpoints can be the terminus or an intermediary service
             li Allows for load balancing and intermediate security enforcers
 
@@ -163,6 +162,9 @@ html(class="no-js", ng-app="main")
           ul
             li Easy to implement
             li Usable across many different platforms and languages
+
+        section
+          img(src='./assets/img/microservicearchitecture.png')
 
         section
           h2 Why REST and Grails?
@@ -210,9 +212,9 @@ html(class="no-js", ng-app="main")
           p Or
           pre.
             <code class="java">"/gr8ladies"(resources:"gr8lady") {
-              "/chapter"(controller:"chapter", method:"GET")
+              "/chapters"(controller:"chapter", method:"GET")
             }</code>
-          small --> /gr8ladies/{id}/chapter
+          small --> /gr8ladies/{id}/chapters
 
         section
           h2 10 Ways To Improve A RESTful API
@@ -270,11 +272,11 @@ html(class="no-js", ng-app="main")
               td
                 img(src='./assets/img/HTTPStatusFosters/200OKJulie.jpg', style="width: 250px;border:none;")
               td
-                img(src='./assets/img/HTTPStatusFosters/203NonAuthoritativePumpkin.jpg', style="width: 250px;border:none;")
+                img(src='./assets/img/HTTPStatusFosters/203NonAuthoritativePumpkin.JPG', style="width: 250px;border:none;")
               td
                 img(src='./assets/img/HTTPStatusFosters/204NoContentHalo.jpg', style="width: 250px;border:none;")
               td
-                img(src='./assets/img/HTTPStatusFosters/206PartialContentPumpkin.jpg', style="width: 250px;border:none;")
+                img(src='./assets/img/HTTPStatusFosters/206PartialContentPumpkin.JPG', style="width: 250px;border:none;")
         section
           h2 3xx
           table
@@ -294,7 +296,18 @@ html(class="no-js", ng-app="main")
                 td
                   img(src='./assets/img/HTTPStatusFosters/400BadHalo.jpg', style="width: 250px;border:none;")
                 td
-                  img(src='./assets/img/HTTPStatusFosters/424FailedDependencyPumpkin.jpg', style="width: 250px;border:none;")
+                  img(src='./assets/img/HTTPStatusFosters/404NotFound.jpg', style="width: 250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/406NotAcceptable.jpg', style="width: 250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/409Conflict.jpg', style="width: 250px; border:none;")
+              tr
+                td
+                  img(src='./assets/img/HTTPStatusFosters/423Locked.jpg', style="width: 250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/424FailedDependencyPumpkin.JPG', style="width: 250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/431RequestHeaderTooLarge.jpg', style="width: 250px;border:none;")
                 td
                   img(src='./assets/img/HTTPStatusFosters/444NoResponseHalo.jpg', style="width: 250px;border:none;")
         section
@@ -302,7 +315,13 @@ html(class="no-js", ng-app="main")
           table
               tr
                 td
-                  img(src='./assets/img/HTTPStatusFosters/503UnavailableCurly.jpg', style="width:250px;border:none;")
+                  img(src='./assets/img/HTTPStatusFosters/502BadGateway.jpg', style="width:250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/503UnavailableCurly.JPG', style="width:250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/504GatewayTimeout.jpg', style="width:250px;border:none;")
+                td
+                  img(src='./assets/img/HTTPStatusFosters/599NetworkTimeoutError.jpg', style="width:250px;border:none;")
         section
           h2 Do's and Dont's
           ul
@@ -341,7 +360,6 @@ html(class="no-js", ng-app="main")
           p URL Mappings
           pre.
             <code class="java">"/gr8ladies"(resource: "gr8lady", method: "GET")</code>
-
         section
           h2 3. Name Endpoints Consistently and Appropriately
           h3 List
@@ -513,7 +531,7 @@ html(class="no-js", ng-app="main")
                   "type": "application/hal+json"
                 }
               },
-              "name": ""Grace Hopper""
+              "name": "Grace Hopper"
             }</code>
         section
           h2 9. Or Use Pagination<sup>*</sup>
@@ -559,7 +577,8 @@ html(class="no-js", ng-app="main")
         section
           h2 Read-only Mode
           ul
-            li for public APIs (or security)
+            li for public APIs
+            li or as a security measure
 
         section
           h2 Read-only Mode in Grails
@@ -570,6 +589,8 @@ html(class="no-js", ng-app="main")
               ...
             }</code>
         section
+          h2 Example
+        section
           h2 Related Plugins for other Grails versions
 
         section
@@ -578,14 +599,18 @@ html(class="no-js", ng-app="main")
           p <img class="inline-thumb" src="./assets/img/active-icon.png"/>
           p Last Updated May 2015
           p <a href="https://github.com/alvarosanchez/grails-spring-security-rest">Source & Documentation</a>
+          p Greach 2014
+          a(href="https://www.youtube.com/watch?v=Va2OlHQdonI") Video
 
         section
           h2 Restful API Plugin
+          p For more complicated APIs
           p Last Updated November 2014
           p <a href="https://github.com/restfulapi/restful-api">Source & Documentation</a>
 
         section
           h2 Rest Renderer
+          p For greater control over data output
           p Last Updated February 2014
           p <a href="https://github.com/danveloper/grails-rest-renderers">Source & Documentation</a>
 
