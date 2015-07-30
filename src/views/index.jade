@@ -217,6 +217,16 @@ html(class="no-js", ng-app="main")
           small --> /gr8ladies/{id}/chapters
 
         section
+          h2 Getting Started
+          p Controller Responses
+          pre.
+            <code class="java">class CompanyController {
+              def index() {
+                respond company
+              }
+            }</code>
+          p uses either the accept header or file extension
+        section
           h2 10 Ways To Improve A RESTful API
           h3 with Grails Examples
         section
@@ -531,7 +541,7 @@ html(class="no-js", ng-app="main")
                   "type": "application/hal+json"
                 }
               },
-              "name": "Grace Hopper"
+              "name": "Jenn Strater"
             }</code>
         section
           h2 9. Or Use Pagination<sup>*</sup>
@@ -543,7 +553,7 @@ html(class="no-js", ng-app="main")
               respond [results: gr8ladies, max: params.max, offset: params.offset]
             }</code>
         section
-          h2 And Versioning<sup>*</sup>
+          h2 10. And Versioning<sup>*</sup>
           ul
             li <b>URI</b> <code class="http">http://example.com/v1/resource/{id}</code>
             li <b>Custom Header</b>
@@ -625,7 +635,7 @@ html(class="no-js", ng-app="main")
         section
           h3 Questions?
           h1
-            img(src='./assets/img/halopanic.jpg', style="border:none;margin:0px;height:500px;width:600px;")
+            img(src='./assets/img/halopanic.jpg', style="border:none;margin:0px;height:40%;width:40%;")
           p <a href="http://twitter.com/jennstrater" target="_blank"><img style="border:none;margin:0px;box-shadow:none;" src="./assets/img/CompanyAndProductLogos/twitter.png"/>@jennstrater</a>
           p jenn@gr8ladies.org
 
